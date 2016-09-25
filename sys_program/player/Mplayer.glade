@@ -1,0 +1,1137 @@
+<?xml version="1.0"?>
+<interface>
+  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkWindow" id="main_window">
+    <property name="width_request">800</property>
+    <property name="height_request">480</property>
+    <property name="title" translatable="yes">Mplayer</property>
+    <child>
+      <object class="GtkFixed" id="fixed_main">
+        <property name="width_request">800</property>
+        <property name="height_request">480</property>
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkHBox" id="hbox_left">
+            <property name="width_request">280</property>
+            <property name="height_request">480</property>
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkFixed" id="fixed_list">
+                <property name="width_request">280</property>
+                <property name="height_request">480</property>
+                <property name="visible">True</property>
+                <child>
+                  <object class="GtkVBox" id="vbox_blist">
+                    <property name="width_request">280</property>
+                    <property name="height_request">55</property>
+                    <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkFixed" id="fixed_blist">
+                        <property name="visible">True</property>
+                        <child>
+                          <object class="GtkTable" id="table_blist">
+                            <property name="width_request">280</property>
+                            <property name="height_request">25</property>
+                            <property name="visible">True</property>
+                            <property name="n_columns">3</property>
+                            <child>
+                              <object class="GtkButton" id="bmusic_list">
+                                <property name="label" translatable="yes">&#x6211;&#x7684;&#x97F3;&#x4E50;</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="bmusic_collect">
+                                <property name="label" translatable="yes">&#x6211;&#x7684;&#x6536;&#x85CF;</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="bmusic_recently">
+                                <property name="label" translatable="yes">&#x6700;&#x8FD1;&#x64AD;&#x653E;</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">2</property>
+                                <property name="right_attach">3</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkFixed" id="fixed_search">
+                            <property name="width_request">280</property>
+                            <property name="height_request">30</property>
+                            <property name="visible">True</property>
+                            <child>
+                              <object class="GtkTable" id="table_search">
+                                <property name="width_request">249</property>
+                                <property name="height_request">20</property>
+                                <property name="visible">True</property>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="x">30</property>
+                                <property name="y">6</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="button_search">
+                                <property name="width_request">28</property>
+                                <property name="height_request">28</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                              </object>
+                              <packing>
+                                <property name="x">1</property>
+                                <property name="y">3</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="y">25</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkEventBox" id="eventbox_musiclist">
+                    <property name="width_request">280</property>
+                    <property name="height_request">425</property>
+                    <property name="visible">True</property>
+                    <child>
+                      <object class="GtkFixed" id="fixed_musiclist">
+                        <property name="visible">True</property>
+                        <child>
+                          <object class="GtkTable" id="table_musiclist">
+                            <property name="width_request">280</property>
+                            <property name="height_request">425</property>
+                            <property name="visible">True</property>
+                            <property name="n_rows">17</property>
+                            <property name="n_columns">12</property>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="y">55</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkHBox" id="hbox_right">
+            <property name="width_request">510</property>
+            <property name="height_request">480</property>
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkFixed" id="fixed_show">
+                <property name="width_request">520</property>
+                <property name="height_request">480</property>
+                <property name="visible">True</property>
+                <child>
+                  <object class="GtkButton" id="button_back">
+                    <property name="width_request">80</property>
+                    <property name="height_request">80</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <child>
+                      <object class="GtkImage" id="image_back">
+                        <property name="width_request">80</property>
+                        <property name="height_request">80</property>
+                        <property name="visible">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">110</property>
+                    <property name="y">395</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="button_pause">
+                    <property name="width_request">80</property>
+                    <property name="height_request">80</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <child>
+                      <object class="GtkImage" id="image_bause">
+                        <property name="width_request">80</property>
+                        <property name="height_request">80</property>
+                        <property name="visible">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">220</property>
+                    <property name="y">395</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="button_next">
+                    <property name="width_request">80</property>
+                    <property name="height_request">80</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <child>
+                      <object class="GtkImage" id="image_next">
+                        <property name="width_request">80</property>
+                        <property name="height_request">80</property>
+                        <property name="visible">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">330</property>
+                    <property name="y">395</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkTable" id="table_lrc">
+                    <property name="width_request">480</property>
+                    <property name="height_request">140</property>
+                    <property name="visible">True</property>
+                    <property name="n_rows">7</property>
+                    <child>
+                      <object class="GtkLabel" id="label_lrc1">
+                        <property name="width_request">480</property>
+                        <property name="height_request">20</property>
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">label</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label_lrc2">
+                        <property name="width_request">480</property>
+                        <property name="height_request">20</property>
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">label</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label_lrc3">
+                        <property name="width_request">480</property>
+                        <property name="height_request">20</property>
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">label</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label_lrc4">
+                        <property name="width_request">480</property>
+                        <property name="height_request">20</property>
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">label</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">3</property>
+                        <property name="bottom_attach">4</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label_lrc5">
+                        <property name="width_request">480</property>
+                        <property name="height_request">20</property>
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">label</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">4</property>
+                        <property name="bottom_attach">5</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label_lrc6">
+                        <property name="width_request">480</property>
+                        <property name="height_request">20</property>
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">label</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">5</property>
+                        <property name="bottom_attach">6</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label_lrc7">
+                        <property name="height_request">20</property>
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">label</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">6</property>
+                        <property name="bottom_attach">7</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">20</property>
+                    <property name="y">200</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage" id="image_logo">
+                    <property name="width_request">140</property>
+                    <property name="height_request">140</property>
+                    <property name="visible">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">360</property>
+                    <property name="y">10</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label_cur_time">
+                    <property name="width_request">60</property>
+                    <property name="height_request">20</property>
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes">label</property>
+                  </object>
+                  <packing>
+                    <property name="x">25</property>
+                    <property name="y">156</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label_end_time">
+                    <property name="width_request">60</property>
+                    <property name="height_request">20</property>
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes">label</property>
+                  </object>
+                  <packing>
+                    <property name="x">430</property>
+                    <property name="y">156</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkTable" id="table_title">
+                    <property name="width_request">320</property>
+                    <property name="height_request">65</property>
+                    <property name="visible">True</property>
+                    <property name="n_rows">3</property>
+                    <child>
+                      <object class="GtkLabel" id="label_title1">
+                        <property name="height_request">20</property>
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">label</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label_title2">
+                        <property name="height_request">20</property>
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">label</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label_title3">
+                        <property name="height_request">20</property>
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">label</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">90</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEventBox" id="eventbox_bar">
+                    <property name="width_request">440</property>
+                    <property name="height_request">24</property>
+                    <property name="visible">True</property>
+                    <child>
+                      <object class="GtkFixed" id="fixed_bar">
+                        <property name="width_request">440</property>
+                        <property name="height_request">20</property>
+                        <property name="visible">True</property>
+                        <child>
+                          <object class="GtkProgressBar" id="progress_bar">
+                            <property name="width_request">440</property>
+                            <property name="height_request">8</property>
+                            <property name="visible">True</property>
+                          </object>
+                          <packing>
+                            <property name="y">8</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">40</property>
+                    <property name="y">170</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="button_backward">
+                    <property name="width_request">70</property>
+                    <property name="height_request">70</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <child>
+                      <object class="GtkImage" id="image_backward">
+                        <property name="width_request">70</property>
+                        <property name="height_request">70</property>
+                        <property name="visible">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">20</property>
+                    <property name="y">400</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="button_forward">
+                    <property name="width_request">70</property>
+                    <property name="height_request">70</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <child>
+                      <object class="GtkImage" id="image_forward">
+                        <property name="width_request">70</property>
+                        <property name="height_request">70</property>
+                        <property name="visible">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">430</property>
+                    <property name="y">400</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkHSeparator" id="hseparator_show">
+                    <property name="width_request">480</property>
+                    <property name="height_request">1</property>
+                    <property name="visible">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">15</property>
+                    <property name="y">385</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEventBox" id="eventbox_volume">
+                    <property name="width_request">280</property>
+                    <property name="height_request">60</property>
+                    <property name="visible">True</property>
+                    <child>
+                      <object class="GtkFixed" id="fixed_volume">
+                        <property name="width_request">280</property>
+                        <property name="height_request">60</property>
+                        <property name="visible">True</property>
+                        <child>
+                          <object class="GtkButton" id="button_volume">
+                            <property name="width_request">60</property>
+                            <property name="height_request">60</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">30</property>
+                    <property name="y">10</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkVSeparator" id="vseparator">
+                    <property name="width_request">1</property>
+                    <property name="height_request">480</property>
+                    <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="button_playmode">
+                    <property name="width_request">28</property>
+                    <property name="height_request">28</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">26</property>
+                    <property name="y">354</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="x">280</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

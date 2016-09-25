@@ -1,0 +1,6 @@
+/home/pc/share/test.c is a file
+../homework/1st_week is a directory
+../homework/2nd_week is a directory
+../homework/3rd_week is a directory
+../homework/guess_number.c is a file
+../homework/test_typewriting.c is a file

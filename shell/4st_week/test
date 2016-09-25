@@ -1,0 +1,40 @@
+#!/bin/bash
+
+cd $HOME
+
+if [ ! -d "test" ]
+then
+	echo "test directory is not exist!"
+	read -p "input 'y' to create or 'n' to leave: " answer
+
+	case $answer in
+	y | Y) mkdir test
+		   echo "create test directory succeed";;
+	n | N) exit;;
+	*) echo "input error!"
+	   exit;;
+	esac
+fi
+
+echo "cd test"
+cd test
+
+count=1
+read -p "please input a file name: " filename
+
+until [ ! -f "$filename" ]
+do
+	read -p "$filename is exist, input again: " filename
+	count=$[ $count + 1 ]
+
+	if [ $count -eq 3 ]
+	then
+		echo "exit!"
+		exit
+	fi
+done
+
+if test touch "$filename"
+then
+	echo "create $filename file succeed"
+fi

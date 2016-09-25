@@ -1,0 +1,25 @@
+#!/bin/bash
+
+while [ -n "$1" ]
+do
+	case "$1" in
+	-a) echo "-a option";;
+	-b) param="$2"
+		echo "-b option,with parameter value $param"
+		shift 2;;
+	-c) echo "-c option";;
+	--) shift
+		break;;
+	*) echo "$1 is not a option";;
+	esac
+
+	shift
+done
+
+count=1
+for param in $@
+do
+	echo "Parameter #$count: $param"
+	conut=$[ $count + 1 ]
+done
+

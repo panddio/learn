@@ -1,0 +1,14 @@
+1、安装
+   sudo apt-get install libgtk2.0*      
+   #gtk+2.0所需的所有文件统通下载安装完毕。
+   
+2、测试
+运行：
+pkg-config --cflags --libs gtk+-2.0
+现象：
+-pthread -I/usr/local/include/gio-unix-2.0/ -I/usr/local/include/atk-1.0 -I/usr/local/include/glib-2.0 -I/usr/local/lib/glib-2.0/include -I/usr/include/gtk-2.0 -I/usr/include/pango-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/pixman-1 -I/usr/include/libpng12  
+说明成功
+
+3、linux编译程序
+1) 把《02.gtk_linux_code》文件夹拷贝到虚拟机任意目录
+2) 进入此文件夹目录，分别测试各个demo(每个demo都写好makefile)

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+while getopts :ab:cd opt
+do
+	case "$opt" in
+	a) echo "-a option";;
+	b) echo "-b option,with parameter value $OPTARG";;
+	c) echo "-c option";;
+	d) echo "-d option";;
+	*) echo "Unknown option: $opt";;
+	esac
+done
+shift $[ $OPIND + 2 ]
+count=1
+
+for param in $@
+do
+	echo "Parameter #$count: $param"
+	count=$[ $count + 1 ]
+done
+
