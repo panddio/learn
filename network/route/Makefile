@@ -3,8 +3,8 @@ DIR_SRC := ./src
 DIR_OBJ := ./obj
 DIR_BIN := ./bin
 
-SRC = $(wildcard ${DIR_SRC}/*.c)  
-OBJ = $(patsubst %.c,${DIR_OBJ}/%.o,$(notdir ${SRC})) 
+SRC = $(wildcard ${DIR_SRC}/*.c)
+OBJ = $(patsubst %.c,${DIR_OBJ}/%.o,$(notdir ${SRC}))
 
 TARGET = route
 
@@ -17,10 +17,10 @@ CFLAGES = -lpthread
 
 $(BIN_TARGET):$(OBJ)
 	$(CC) $(OBJ)  -o $@ $(CFLAGES)
-    
+
 $(DIR_OBJ)/%.o:$(DIR_SRC)/%.c
 	$(CC) $(INCFAG) -c  $< -o $@ $(CFLAGES)
-	
+
 .PHONY:clean
 clean:
 #	find $(DIR_OBJ) -name *.o -exec rm -rf {}\ ;

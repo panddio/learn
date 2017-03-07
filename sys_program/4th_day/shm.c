@@ -13,6 +13,7 @@
 #include <sys/ipc.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include <sys/shm.h>
 #include <string.h>
 
 

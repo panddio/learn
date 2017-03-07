@@ -15,7 +15,149 @@
 #include <unistd.h>
 #include <termios.h>
 
-#if 1
+#if 0
+struct cim_framebuf {
+	unsigned char id;
+	unsigned char busy;
+	unsigned char *pfree;
+	unsigned char *vaddr;
+	unsigned char *paddr;
+	struct cim_framebuf *next;
+};
+
+struct jz_cim_dev {
+	unsigned int nbuf;
+	unsigned int frame_size;
+	unsigned char read_flag;
+	unsigned char dma_started;
+	struct cim_framebuf *framebuf_head;
+	struct cim_framebuf *framebuf_index;
+};
+
+struct jz_cim_dev *cim = NULL;
+
+static struct cim_framebuf *cim_insert_link(struct cim_framebuf *head, struct cim_framebuf *in)
+{
+	struct cim_framebuf *pi, *pb;
+
+	if(in != NULL) {
+		pi = in;
+
+		if(head == NULL) {
+			head = pi;
+			head->next = head;
+		} else {
+			pb = head;
+
+			while(pb->next != head)
+				pb = pb->next;
+
+			pi->next = head;
+			pb->next = pi;
+		}
+	}
+
+	return head;
+}
+
+static struct cim_framebuf *cim_free_link(struct cim_framebuf *head)
+{
+	struct cim_framebuf *pb, *pn;
+
+	if(head != NULL) {
+		pb = head;
+		pn = head->next;
+
+		while(pn != head) {
+			free(pb->pfree);
+			free(pb);
+
+			pb = pn;
+			pn = pn->next;
+		}
+
+		/* Last node */
+		free(pb->pfree);
+		free(pb);
+	}
+
+	return NULL;
+}
+
+void cim_print_link(struct cim_framebuf *head)
+{
+	struct cim_framebuf *pb;
+	if(head != NULL) {
+		pb = head;
+		printf("pb->id = %d\n", pb->id);
+
+		while(pb->next != head) {
+			pb = pb->next;
+			printf("pb->id = %d\n", pb->id);
+		}
+	}
+}
+
+static int cim_fb_malloc(struct jz_cim_dev *cim)
+{
+	int i;
+	struct cim_framebuf *in;
+
+	for(i = 0; i < cim->nbuf; i++) {
+		in = (struct cim_framebuf *)malloc(sizeof(struct cim_framebuf));
+		if(!in) {
+			printf("Can nor apply a framebuf memory space!\n");
+			return -1;
+		}
+
+		in->vaddr = (unsigned char *)malloc(cim->frame_size + 0x3f);
+		if(!in->vaddr) {
+			printf("malloc framebuf failed\n");
+			return -1;
+		}
+
+		memset(in->vaddr, 0, cim->frame_size);
+		in->id = i;
+		in->pfree = in->vaddr;
+		in->paddr = in->vaddr;
+
+		if((unsigned int)in->paddr & 0x3f) { // Not aligned
+			in->paddr += ((unsigned int)in->paddr / 128 + 1) * 128 - (unsigned int)in->paddr;
+			in->vaddr += ((unsigned int)in->vaddr / 128 + 1) * 128 - (unsigned int)in->vaddr;
+		}
+
+		printf("cim->framebuf vaddr = 0x%08x\n", in->vaddr);
+		printf("cim->framebuf paddr = 0x%08x\n", in->paddr);
+		cim->framebuf_head = cim_insert_link(cim->framebuf_head, in);
+	}
+
+	cim->framebuf_index = cim->framebuf_head;
+
+	return 0;
+}
+
+static void cim_fb_free(struct jz_cim_dev *cim)
+{
+	cim->framebuf_head = cim_free_link(cim->framebuf_head);
+}
+
+int main(int argc, char *argv[])
+{
+	cim = (struct jz_cim_dev *)malloc(sizeof(struct jz_cim_dev));
+	if(!cim) {
+		printf("%s -- malloc cim dev failed\n", __FUNCTION__);
+		return -1;
+	}
+
+	memset(cim, 0, sizeof(struct jz_cim_dev));
+
+	cim->nbuf = 3;
+
+	cim_fb_malloc(cim);
+	cim_print_link(cim->framebuf_head);
+	return 0;
+}
+#elif 0
 #include "console.h"
 
 static char getch() 
@@ -815,12 +957,12 @@ main()
 	
 }
 
-#elif 0
+#elif 1
 int main()
 {
 	char buf[]="I am a good programer, am i? hello, world.";
 	//			?i am ,programer good a am i
-
+    //char buf[]="dhhd23jd32kk5623.  6323";
 	char * p[50],ch,*str;
 	int i=0,j=0,word_num=0;
 	printf("***%s***\n",buf);
@@ -832,6 +974,13 @@ int main()
 		p[i]=strtok(NULL," ");
 	}
 	word_num=i;
+
+#if 1
+    printf("word_num=%d\n", word_num);
+    for(i = 0; i < word_num; i++) {
+        printf("p[%d]=%s\n", i, p[i]);
+    }
+#else
 	for(i=0; i< word_num; i++)//把所有单词中有标点符号的处理完
 	{
 		if(ispunct( *(p[i]+strlen(p[i])-1)) != 0) //检查参数是否为标点符号或特殊符号，是，返回TRUE
@@ -854,6 +1003,7 @@ int main()
 
 	strcpy(buf,str);
 	printf("***%s***\n",buf);
+#endif
 	free(str);
 	return 0;
 }

@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
 
 	sem_init(&play.sem1, 0, 1);
 	sem_init(&play.sem2, 0, 0);
-	
+
 	pthread_create(&pth1,NULL,fun1,(void *)&play);
 	//sleep(1);
 	pthread_create(&pth2,NULL,fun2,(void *)&play);

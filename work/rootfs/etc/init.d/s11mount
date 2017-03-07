@@ -1,0 +1,55 @@
+#!/bin/sh
+
+# mount rootfs
+mount -t jffs2  /dev/mtdblock3 /mnt/rootfs
+
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
+libs="ld-2.16.so
+ld.so.1
+libc-2.16.so
+libcrypto.so
+libcrypto.so.1.0.0
+libc.so.6
+libdl-2.16.so
+libdl.so.2
+libm-2.16.so
+libm.so.6
+libnss_dns-2.16.so
+libnss_dns.so.2
+libnss_files-2.16.so
+libnss_files.so.2
+libpthread-2.16.so
+libpthread.so.0
+libresolv-2.16.so
+libresolv.so.2
+librt-2.16.so
+librt.so.1
+
+libnl-3.so
+libnl-3.so.200
+libnl-3.so.200.19.0
+libnl-genl-3.so
+libnl-genl-3.so.200
+libnl-genl-3.so.200.19.0
+libssl.so
+libssl.so.1.0.0"
+
+# copy libs
+ROOTFS=/mnt/rootfs
+
+for lib in $libs
+do
+    if [ -f $ROOTFS/lib/$lib ]; then
+        cp $ROOTFS/lib/$lib /lib/ -a
+    elif [ -f $ROOTFS/usr/lib/$lib ]; then
+        cp $ROOTFS/usr/lib/$lib /usr/lib/ -a
+    else
+        echo "$lib dose not exist ..."
+    fi
+done
+
+cp $ROOTFS/sbin/wifi_connect.sh /sbin/
+cp $ROOTFS/usr/sbin/wpa_supplicant /sbin/

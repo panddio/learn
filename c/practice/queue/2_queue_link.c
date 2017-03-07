@@ -44,8 +44,8 @@ int DeQueue( int *e)
     front->next= p->next;   //调整对头指针，为下次出队做准备
 
     if(p == rear)           //若队头指针追上队尾指针，调整队头指针，此时队空
-        rear = front; 
-        
+        rear = front;
+
     free(p);                //释放已出队数据
     return 1;
 }
