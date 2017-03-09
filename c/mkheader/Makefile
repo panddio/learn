@@ -3,19 +3,19 @@ CC := gcc
 TAG := app
 CFLAG := -lm
 
-all: $(TAG) god loader
+all: $(TAG) mkheader loader
 
 $(TAG):$(SRC)
 	$(CC) -o $(TAG) app.c
 
-god:$(TAG)
-	$(CC) -o $@ god.c
+mkheader:$(TAG)
+	$(CC) -o $@ mkheader.c
 	strip $@
-	@./god ./app > log
+	@./mkheader ./app > log
 
 loader:
 	$(CC) -o $@ loader.c
 
 .PHONY:clean
 clean:
-	rm -f $(TAG) *.o god loader log n_app
+	rm -f $(TAG) *.o mkheader loader log n_app
