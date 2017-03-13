@@ -1,0 +1,4 @@
+#!/bin/sh
+make clean
+make
+cp -f cimtest /mnt/hgfs/wlshare/linuxdevelop/tmp 
