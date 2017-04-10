@@ -1,0 +1,133 @@
+[    0.713847] cim_enable0,54
+[    0.716650] sensor_rst0,54
+[    0.719439] sensor_en0,53
+[    0.722198] soc-camera-pdrv soc-camera-pdrv: Probing soc-camera-pdrv
+[    1.226447] jz Camera driver attached to camera 0
+[    1.242755] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 1141 ov772x_probe
+[    1.251729] ov772x_probe: client->name = ov7725 client->addr = 0x21
+[    1.258298] platform data fail to add, use malloc instead
+[    1.264033] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 1002 ov772x_video_probe
+[    1.273587] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 773 ov772x_s_power
+[    1.433741] ov7725 0-0021: i2c connect ok, ov7725 Product ID 77:21 Manufacturer ID 7f:a2
+[    1.442087] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 666 ov772x_s_ctrl
+[    1.451072] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 671 ov772x_s_ctrl
+[    1.460472] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 666 ov772x_s_ctrl
+[    1.469460] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 680 ov772x_s_ctrl
+[    1.478859] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 666 ov772x_s_ctrl
+[    1.487847] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 689 ov772x_s_ctrl
+[    1.497656] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 707 ov772x_s_ctrl
+[    1.506642] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 773 ov772x_s_power
+[    1.665338] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 544 to_ov772x
+[    1.674018] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 939 ov772x_g_fmt
+[    1.863218] jffs2: notice: (1) jffs2_build_xattr_subsystem: complete building xattr subsystem, 0 of xdatum (0 unchecked, 0 orphan) and 0 of xref (0 dead, 0 orphan) found.
+[    1.880320] VFS: Mounted root (jffs2 filesystem) on device 31:2.
+[    1.887553] Freeing unused kernel memory: 184K (80452000 - 80480000)
+Starting mdev...
+# 
+# cimutils -I 0 -C -v -x 640 -y 480
+using cim0 ......
+do capture......
+using internal userptr ......
+capture width = 640
+capture height = 480
+VPU initialize
+VAE mmap successfully done! vpu_base = 0x777ae000
+VAE mmap successfully done! cpm_base = 0x77ad6000
+------mmapfd = 0
++++ Jz47:  power 0xc memory, imem_info[memdev_count].name = /proc/jz/mem/imem.
++++ Jz47:  paddr 0x1c00000 memory, pages =1024.
++++ Jz47:  imem_info[memdev_count].vaddr 0x0.
++++ Jz47:  get address 0x773ae000 memory.
++++ Jz47:  get address pc 0x777adfff memory.
++++ Jz47:  1.
++++ Jz47:  1.
++++ Jz47:  2.
++++ Jz47:  3.
++++ Jz47:  4.
+Jz47 Dev alloc: vaddr = 0x773ae000, paddr = 0x1c00000, size = 0x400000 ++
+==>main L415: video dev name = /dev/video0
+[  270.967361] jz Camera driver attached to camera 0
+[  270.992149] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 773 ov772x_s_power
+[  271.150545] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 981 ov772x_try_fmt
+[  271.159623] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 804 ov772x_select_params
+[  271.169237] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 784 ov772x_select_win
+[  271.178583] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 544 to_ov772x
+[  271.187212] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 956 ov772x_s_fmt
+[  271.196107] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 804 ov772x_select_params
+[  271.205720] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 784 ov772x_select_win
+[  271.215060] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 622 ov772x_reset
+[  271.249833] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 1087 ov772x_g_mbus_config
+[  271.259544] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 1104 ov772x_s_mbus_config
+[  271.269253] jz-cim jz-cim.0: -------------> pclk active falling
+[  271.275373] jz-cim jz-cim.0: -------------> vsync active rising
+[  271.281475] jz-cim jz-cim.0: -------------> hsync active rising
+[  271.287591] REG_CIM_CFG      =       0x00001c42
+[  271.291273] REG_CIM_CTRL     =       0x00000080
+[  271.295061] REG_CIM_CTRL2    =       0x00c00015
+[  271.298921] REG_CIM_STATE    =       0x00000002
+[  271.302799] REG_CIM_IMR      =       0x00000f0d
+[  271.306481] REG_CIM_IID      =       0x00000000
+[  271.310159] REG_CIM_DA       =       0x00000000
+[  271.313768] REG_CIM_FA       =       0x00000000
+[  271.317359] REG_CIM_FID      =       0x00000000
+[  271.321038] REG_CIM_CMD      =       0x00000000
+[  271.324737] REG_CIM_WSIZE    =       0x00000000
+[  271.328598] REG_CIM_WOFFSET  =       0x00000000
+[  271.332655] REG_CIM_FS       =       0x01df427f
+==>init_device L500: io method: IO_METHOD_USERPTR
+[  271.336453] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 929 ov772x_cropcap
+
+[  271.349701] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 913 ov772x_g_crop
+[  271.358864] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 981 ov772x_try_fmt
+[  271.368006] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 804 ov772x_select_params
+[  271.377625] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 784 ov772x_select_win
+[  271.386973] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 544 to_ov772x
+[  271.395599] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 956 ov772x_s_fmt
+[  271.404491] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 804 ov772x_select_params
+[  271.414111] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 784 ov772x_select_win
+[  271.423455] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 622 ov772x_reset
+[  271.459832] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 1087 ov772x_g_mbus_config
+[  271.469542] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 1104 ov772x_s_mbus_config
+[  271.479251] jz-cim jz-cim.0: -------------> pclk active falling
+[  271.485374] jz-cim jz-cim.0: -------------> vsync active rising
+[  271.491477] jz-cim jz-cim.0: -------------> hsync active rising
+[  271.497593] REG_CIM_CFG      =       0x00001c42
+[  271.501275] REG_CIM_CTRL     =       0x00000080
+[  271.505063] REG_CIM_CTRL2    =       0x00c00015
+[  271.508923] REG_CIM_STATE    =       0x00000002
+[  271.512804] REG_CIM_IMR      =       0x00000908
+[  271.516485] REG_CIM_IID      =       0x00000000
+[  271.520165] REG_CIM_DA       =       0x00000000
+[  271.523773] REG_CIM_FA       =       0x00000000
+[  271.527366] REG_CIM_FID      =       0x00000000
+[  271.531044] REG_CIM_CMD      =       0x00000000
+[  271.534743] REG_CIM_WSIZE    =       0x00000000
+[  271.538603] REG_CIM_WOFFSET  =       0x00000000
+[  271.542660] REG_CIM_FS       =       0x01df427f
+==>set_format L483: sizeimage=0x96000 fmt.fmt.pix.width = 0x280 fmt.fmt.pix.height = 0x1e0
+==>init_userp L389: the buffers[0].start = 77400000
+[  271.546533] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 544 to_ov772x
+[  271.560559] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 642 ov772x_s_stream
+
+
+[ 1795.344765] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 544 to_ov772x
+[ 1795.356401] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 642 ov772x_s_stream
+[ 1795.378051] halley report: Nov  2 2016 drivers/media/i2c/soc_camera/ov7725.c 773 ov772x_s_power
+--------------------------------
+==>process_frame() L44: yuv422!
+==>yuv422_packed_to_jpeg 133L  save_jpeg_userptr =1 
+sw struct padding
+struct padding
+write vdma chn
+open clock!
+write huffman table!
+write quantization table!
+write regs!
+refresh cache
+picture taked!!!!!!!!
+
+
+----------------------CIM TEST END -----------------------
+VAE unmap successfully done!
+------mmapfd = 0
+

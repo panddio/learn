@@ -1,0 +1,45 @@
+v4l2 camera 驱动架构 之 杂七杂八  
+
+1. v4l2 camera 正确加载后创建的节点是 /dev/vidio0 主设备号是 81。
+
+2. sensor 驱动的 probe 函数中一定要填充下面两个成员：
+
+//这两个数据成员一定要填充
+icd->num_formats = ARRAY_SIZE(fake_colour_formats);
+icd->formats = fake_colour_formats;
+
+其中 fake_colour_formats 指向的是格式列表，icd 指向的是 soc_camera_device。
+
+3. 各个模块加载顺序：
+
+假设 soc_camera、sensor 和 map100_camera 编译成不同的模块，则加载 driver 时应该按照下面的顺序。
+
+先加载的驱动是 soc_camera.c 中的 soc-camera-pdrv，这个驱动会调用 soc_camera_pdrv_probe，该函数会创建soc_camera_device 并做基本的初始化。之后这个 soc_camera_device 会被加到一个 devices 链表中。
+
+第二个加载的驱动是 sensor 的驱动。但是 sensor 的 probe 不会被调用，因为这时 sensor 的 device 还没有被注册。
+
+第三个加载的驱动是 map100_camera，这个驱动会注册 soc_camera_host，然后遍历之前的 devices 链表，按照这个条件 icd->iface == ici->nr 匹配对应的 soc_camera_host（注意：iface就是bus_id）。这个驱动的另一个作用是根据 iclink创建创建 sensor 的 i2c_client，并调用 sensor 驱动的 probe 函数。以上工作完成后，虚拟总线检测函数soc_camera_probe 会被调用，从而创建设备节点。
+
+4. devs.c 中的设备定义：
+
+static struct soc_camera_link iclink = {
+ //与soc_camera_host的nr对应
+ .bus_id = 0,
+ //map_camera_sensor 不能加到 i2c 设备数组中，这会导致 sensor 驱动在 map100_camera 之前被调用，从而打乱调用顺序，导致 camera 初始化失败
+ .board_info = &map_camera_sensor,
+ .i2c_adapter_id = 0,
+ .query_bus_param = fake_camera_query_bus_param,
+ .set_bus_param = fake_camera_set_bus_param,
+ .free_bus = fake_camera_free_bus,
+ .module_name = "fake_camera",
+};
+
+static struct platform_device fake_camera_platform_dev = {
+ .name = "soc-camera-pdrv",
+ .id = 0,
+ .dev = {
+ .platform_data = &iclink,
+ },
+};
+
+5. isp controller 要先初始化，然后再初始化 sensor 芯片。v4l2 的框架的实现方法是，soc_camera_host 的 add_device 会先被调用，在这里初始化 isp controller，之后 sensor 的 probe 会被调用。

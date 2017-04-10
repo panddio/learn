@@ -1,0 +1,389 @@
+U-Boot SPL 2013.07 (Nov 25 2016 - 10:18:25)
+ddrfreq 200000000
+cclk  1008000000
+l2clk 504000000
+h0clk 200000000
+h2clk  200000000
+pclk 100000000
+
+
+U-Boot 2013.07 (Nov 25 2016 - 10:18:25)
+
+Board: Phoenix (Ingenic XBurst X1000 SoC)
+DRAM:  32 MiB
+Top of RAM usable for U-Boot at: 82000000
+Reserving 0k for U-Boot at: 81fc6000
+Reserving 407k for U-Boot at: 81f60000
+Reserving 8196k for malloc() at: 8175f000
+Reserving 32 Bytes for Board Info at: 8175efe0
+Reserving 128 Bytes for Global Data at: 8175ef60
+Reserving 128k for boot params() at: 8173ef60
+Stack Pointer at: 8173ef48
+Now running in RAM - U-Boot at: 81f60000
+MMC:   
+the id code = 1840c8, the flash name is GD25Q128C
+set quad mode is enable.the buf = 1840c802
+*** Warning - bad CRC, using default environment
+
+pixel_clock = 6912
+gpio_request lable = lcd_cs gpio = 50
+gpio_request lable = lcd_rd gpio = 48
+gpio_request lable = lcd_rst gpio = 96
+gpio_request lable = lcd_bl gpio = 97
+truly_tft240240_2_e panel display pin init
+truly_tft240240_2_e panel display on
+dump_lcdc_registers
+the slcd slcd_cfg_new is 00000100
+dump_lcdc_registers
+Net:   =======>MacBase = 0xb34b0000, DmaBase = 0xb34b1000 PhyBase = 0x00000000
+GMAC-9162
+Hit any key to stop autoboot:  0 
+the id code = 1840c8, the flash name is GD25Q128C
+sfcnor read Image from 0x40000 to  0x80800000 size is 0x300000 ...
+sfcnor read ok!
+## Booting kernel from Legacy Image at 80800000 ...
+   Image Name:   Linux-3.10.14
+   Image Type:   MIPS Linux Kernel Image (uncompressed)
+   Data Size:    2707456 Bytes = 2.6 MiB
+   Load Address: 80f00000
+   Entry Point:  80f00000
+   Verifying Checksum ... OK
+   Loading Kernel Image ... OK
+
+Starting kernel ...
+
+Uncompressing Linux...
+Ok, booting the kernel.
+[    0.000000] Initializing cgroup subsys cpuset
+[    0.000000] Initializing cgroup subsys cpu
+[    0.000000] Initializing cgroup subsys cpuacct
+[    0.000000] Linux version 3.10.14 (fsl4.4.2@btrdsrv2) (gcc version 4.7.2 (Ingenic 2015.02) ) #28 PREEMPT Mon Nov 28 17:01:25 HKT 2016
+[    0.000000] bootconsole [early0] enabled
+[    0.000000] CPU0 RESET ERROR PC:AD5A7D6E
+[    0.000000] CPU0 revision is: 2ed1024f (Ingenic Xburst)
+[    0.000000] FPU revision is: 00330000
+[    0.000000] CCLK:1008MHz L2CLK:504Mhz H0CLK:200MHz H2CLK:200Mhz PCLK:100Mhz
+[    0.000000] Determined physical RAM map:
+[    0.000000]  memory: 0055d000 @ 00010000 (usable)
+[    0.000000]  memory: 00033000 @ 0056d000 (usable after init)
+[    0.000000] User-defined physical RAM map:
+[    0.000000]  memory: 01f00000 @ 00000000 (usable)
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x00000000-0x01efffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x00000000-0x01efffff]
+[    0.000000] Primary instruction cache 16kB, 4-way, VIPT, linesize 32 bytes.
+[    0.000000] Primary data cache 16kB, 4-way, VIPT, no aliases, linesize 32 bytes
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping off.  Total pages: 7874
+[    0.000000] Kernel command line: console=ttyS2,115200n8 mem=31M@0x0 ip=off init=/linuxrc rootfstype=jffs2 root=/dev/mtdblock2 rw
+[    0.000000] PID hash table entries: 128 (order: -3, 512 bytes)
+[    0.000000] Dentry cache hash table entries: 4096 (order: 2, 16384 bytes)
+[    0.000000] Inode-cache hash table entries: 2048 (order: 1, 8192 bytes)
+[    0.000000] Memory: 25212k/31744k available (4235k kernel code, 6532k reserved, 1255k data, 204k init, 0k highmem)
+[    0.000000] SLUB: HWalign=32, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] Preemptible hierarchical RCU implementation.
+[    0.000000] NR_IRQS:410
+[    0.000000] clockevents_config_and_register success.
+[    0.000000] Console: colour dummy device 80x25
+[    0.004589] Calibrating delay loop... 1001.88 BogoMIPS (lpj=5009408)
+[    0.047781] pid_max: default: 32768 minimum: 301
+[    0.052734] Mount-cache hash table entries: 512
+[    0.058152] Initializing cgroup subsys devices
+[    0.062596] Initializing cgroup subsys freezer
+[    0.067160] Initializing cgroup subsys blkio
+[    0.075108] regulator-dummy: no parameters
+[    0.079583] NET: Registered protocol family 16
+[    0.100689] bio: create slab <bio-0> at 0
+[    0.106340] jz-dma jz-dma: JZ SoC DMA initialized
+[    0.111280] i2c-core: driver [ricoh619] using legacy suspend method
+[    0.117674] i2c-core: driver [ricoh619] using legacy resume method
+[    0.124300] SCSI subsystem initialized
+[    0.128345] usbcore: registered new interface driver usbfs
+[    0.133880] usbcore: registered new interface driver hub
+[    0.139508] usbcore: registered new device driver usb
+[    0.144792]  (null): set:249  hold:250 dev=100000000 h=500 l=500
+[    0.151096]  (null): set:61  hold:62 dev=100000000 h=125 l=125
+[    0.157146] Linux video capture interface: v2.00
+[    0.162571] Bluetooth: Core ver 2.16
+[    0.166286] NET: Registered protocol family 31
+[    0.170714] Bluetooth: HCI device and connection manager initialized
+[    0.177213] Bluetooth: HCI socket layer initialized
+[    0.182108] Bluetooth: L2CAP socket layer initialized
+[    0.187326] Bluetooth: SCO socket layer initialized
+[    0.193938] gpio:jz->reg = 0xb0010100
+[    0.197722] cfg80211: Calling CRDA to update world regulatory domain
+[    0.204136] gpio pin: 0x2000
+[    0.207028] jz->dev_map[0]: 0x19affc0
+[    0.210720] CPU: 0 PID: 1 Comm: swapper Not tainted 3.10.14 #28
+[    0.216728] Stack : 00000033 80039e24 00000000 800396e4 00000000 00000000 00000000 00000000
+          00000000 00000000 805b2e4a 00000033 8082c1e0 10000c01 00000000 00000000
+          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+          00000000 00000000 00000000 00000000 00000000 80831d00 80831d9c 804c78d0
+          80536c07 8003b0b4 10000c01 804c78d0 00000000 00000001 8082c1e0 80831d10
+          ...
+[    0.252739] Call Trace:
+[    0.255242] [<8001f14c>] show_stack+0x48/0x70
+[    0.259642] [<8042cf7c>] dump_stack+0x20/0x2c
+[    0.264052] [<80017fa0>] jz_gpio_request+0xac/0x128
+[    0.269008] [<801d3d88>] gpiod_request+0xf8/0x1a0
+[    0.273758] [<801d5670>] gpio_request_one+0x30/0x110
+[    0.278808] [<8056e5ac>] pmu_dev_init+0x24/0x13c
+[    0.283471] [<8001051c>] do_one_initcall+0xf0/0x1b4
+[    0.288428] [<8056dacc>] kernel_init_freeable+0x180/0x248
+[    0.293889] [<804292c8>] kernel_init+0x10/0xf8
+[    0.298407] [<8001a3bc>] ret_from_kernel_thread+0x14/0x1c
+[    0.303861] 
+[    0.305372] arch/mips/xburst/soc-x1000/common/gpio.c:gpio functions has redefinition
+[    0.317659] RICOH619_DC2: 600 <--> 3300 mV at 3300 mV normal standby
+[    0.325134] RICOH619_DC4: 600 <--> 3487 mV at 3500 mV normal standby
+[    0.332915] RICOH619_LDO1: 900 <--> 2500 mV at 2500 mV normal standby
+[    0.340300] RICOH619_LDO2: 900 <--> 3475 mV at 3300 mV normal standby
+[    0.347616] RICOH619_LDO3: 600 <--> 3475 mV at 3300 mV normal standby
+[    0.354904] RICOH619_LDO4: 900 <--> 3475 mV at 3300 mV normal standby
+[    0.362248] RICOH619_LDO5: 900 <--> 3475 mV at 3300 mV normal standby
+[    0.370496] Switching to clocksource jz_clocksource
+[    0.381889] jz-dwc2 jz-dwc2: regulator vbus get error
+[    0.387105] DWC IN OTG MODE
+[    0.391841] sft id ==================== 1
+[    0.545284] dwc2 dwc2: Dynamic Power Control
+[    0.549576] dwc2 dwc2: Using Buffer DMA mode
+[    0.752937] dwc2 dwc2: Core Release: 3.00a
+[    0.757098] dwc2 dwc2: DesignWare USB2.0 High-Speed Host Controller
+[    0.763407] dwc2 dwc2: new USB bus registered, assigned bus number 1
+[    0.770670] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+[    0.777586] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    0.784841] usb usb1: Product: DesignWare USB2.0 High-Speed Host Controller
+[    0.791922] usb usb1: Manufacturer: Linux 3.10.14 dwc2-hcd
+[    0.797484] usb usb1: SerialNumber: dwc2
+[    0.801931] hub 1-0:1.0: USB hub found
+[    0.805767] hub 1-0:1.0: 1 port detected
+[    0.809923] dwc2 dwc2: DWC2 Host Initialized
+[    0.814640] Suspend otg by shutdown dwc cotroller and phy
+[    0.820136] DIS PHY
+[    0.822498] Resume otg by reinit dwc controller and phy
+[    0.827787] DWC IN OTG MODE
+[    0.832626] dwc2 dwc2: enter dwc2_gadget_plug_change:2589: plugin = 1 pullup_on = 0 suspend = 0
+[    0.841985] NET: Registered protocol family 2
+[    0.847167] TCP established hash table entries: 512 (order: 0, 4096 bytes)
+[    0.854120] TCP bind hash table entries: 512 (order: 1, 10240 bytes)
+[    0.860641] TCP: Hash tables configured (established 512 bind 512)
+[    0.866969] TCP: reno registered
+[    0.870172] UDP hash table entries: 256 (order: 1, 12288 bytes)
+[    0.876258] UDP-Lite hash table entries: 256 (order: 1, 12288 bytes)
+[    0.883075] NET: Registered protocol family 1
+[    0.887913] Total 4MB memory at 0xc00000 was reserved for IPU
+[    0.893967] 359,init_ddr_proc
+[    0.904231] NTFS driver 2.1.30 [Flags: R/O].
+[    0.909133] jffs2: version 2.2. (NAND) ?? 2001-2006 Red Hat, Inc.
+[    0.915929] fuse init (API version 7.22)
+[    0.920354] msgmni has been set to 49
+[    0.926605] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 253)
+[    0.934046] io scheduler noop registered
+[    0.938217] io scheduler deadline registered
+[    0.942701] io scheduler cfq registered (default)
+[    0.947811] truly_tft240240_slcd truly_tft240240_slcd.0: lcd device(TRULY TFT240240) register success
+[    0.957334] ======truly_tft240240_power_init==============
+[    0.962830] set lcd_power.inited  =======1 
+[    1.003575] ------------------------------------------------
+[    1.009196] pwm-backlight pwm-backlight.0: unable to request PWM, trying legacy API
+[    1.144948] graphics fb0: LCD H COLOR BAR w,h,bpp(240,240,16), jzfb->vidmem=a0a80000
+[    1.156410] graphics fb0: LCD H COLOR BAR w,h,bpp(240,240,16), jzfb->vidmem=a0a80000
+[    3.158516] graphics fb0: LCD V COLOR BAR w,h,bpp(240,240,16) jzfb->vidmem=a0a80000
+[    5.162367] graphics fb0: LCD H COLOR BAR w,h,bpp(240,240,16), jzfb->vidmem=a0a80000
+[    7.164455] graphics fb0: LCD V COLOR BAR w,h,bpp(240,240,16) jzfb->vidmem=a0a80000
+[    9.168324] graphics fb0: LCD H COLOR BAR w,h,bpp(240,240,16), jzfb->vidmem=a0a80000
+[   11.173314] jz-uart.0: ttyS0 at MMIO 0x10030000 (irq = 59) is a uart0
+[   11.180149] jz-uart.2: ttyS2 at MMIO 0x10032000 (irq = 57) is a uart2
+[   11.186688] console [ttyS2] enabled, bootconsole disabled
+[   11.186688] console [ttyS2] enabled, bootconsole disabled
+[   11.198133] register vprivilege driver OK! Major = 252
+[   11.203564] register vprivilege driver OK! Major = 251
+[   11.209761] the id code = c84018, the flash name is GD25Q128C
+[   11.215764] the flash->board_info->quad_mode = 6b
+[   11.220610] JZ SFC Controller for SFC channel 0 driver register
+[   11.226735] Creating 3 MTD partitions on "sfc_mtd":
+[   11.231771] 0x000000000000-0x000000040000 : "bootloader"
+[   11.238154] 0x000000040000-0x000000340000 : "kernel"
+[   11.244040] 0x000000360000-0x000000fe0000 : "userfs"
+[   11.250022] SPI NOR MTD LOAD OK
+[   11.263493] Bus Mode Reg after reset: 0x00020101, cnt=0
+[   11.269898] Bus Mode Reg after reset: 0x00020101, cnt=1
+[   11.276292] Bus Mode Reg after reset: 0x00020101, cnt=2
+[   11.282669] Bus Mode Reg after reset: 0x00020101, cnt=3
+[   11.289062] Bus Mode Reg after reset: 0x00020101, cnt=4
+[   11.295455] Bus Mode Reg after reset: 0x00020101, cnt=5
+[   11.301831] Bus Mode Reg after reset: 0x00020101, cnt=6
+[   11.308224] Bus Mode Reg after reset: 0x00020101, cnt=7
+[   11.314602] Bus Mode Reg after reset: 0x00020101, cnt=8
+[   11.320996] Bus Mode Reg after reset: 0x00020101, cnt=9
+[   11.327390] func:jz_mii_bus_probe, synopGMAC_reset failed
+[   11.332968] jz_mii_bus: probe of jz_mii_bus.0 failed with error -1
+[   11.339455] =======>gmacdev = 0x80a29f00<================
+[   11.345022] =========>gmacdev->MacBase = 0xb34b0000 DmaBase = 0xb34b1000
+[   11.351966] Bus Mode Reg after reset: 0x00020101, cnt=0
+[   11.358362] Bus Mode Reg after reset: 0x00020101, cnt=1
+[   11.364739] Bus Mode Reg after reset: 0x00020101, cnt=2
+[   11.371133] Bus Mode Reg after reset: 0x00020101, cnt=3
+[   11.377528] Bus Mode Reg after reset: 0x00020101, cnt=4
+[   11.383904] Bus Mode Reg after reset: 0x00020101, cnt=5
+[   11.390297] Bus Mode Reg after reset: 0x00020101, cnt=6
+[   11.396692] Bus Mode Reg after reset: 0x00020101, cnt=7
+[   11.403069] Bus Mode Reg after reset: 0x00020101, cnt=8
+[   11.409514] Bus Mode Reg after reset: 0x00020101, cnt=9
+[   11.415910] func:jz_mac_probe, synopGMAC_reset failed
+[   11.421127] jz_mac: probe of jz_mac.0 failed with error -1
+[   11.426952] usbcore: registered new interface driver asix
+[   11.432592] usbcore: registered new interface driver cdc_ether
+[   11.438718] usbcore: registered new interface driver dm9601
+[   11.444504] usbcore: registered new interface driver net1080
+[   11.450432] usbcore: registered new interface driver cdc_subset
+[   11.456629] usbcore: registered new interface driver zaurus
+[   11.462498] usbcore: registered new interface driver cdc_ncm
+[   11.468497] usbcore: registered new interface driver usb-storage
+[   11.475218] jz-rtc jz-rtc.0: rtc core: registered jz-rtc as rtc0
+[   11.481524] jz-rtc: rtc power on reset !
+[   11.489102] Bluetooth: HCI UART driver ver 2.2
+[   11.493686] Bluetooth: HCI H4 protocol initialized
+[   11.498672] Bluetooth: HCILL protocol initialized
+[   11.503696] jzmmc_v1.2 jzmmc_v1.2.0: vmmc regulator missing
+[   11.545650] jzmmc_v1.2 jzmmc_v1.2.0: register success!
+[   11.551071] jzmmc_v1.2 jzmmc_v1.2.1: vmmc regulator missing
+[   11.596509] jzmmc_v1.2 jzmmc_v1.2.1: register success!
+[   11.601974] leds-gpio: probe of leds-gpio failed with error -16
+[   11.608428] usbcore: registered new interface driver usbhid
+[   11.614175] usbhid: USB HID core driver
+[   11.618221] Netfilter messages via NETLINK v0.30.
+[   11.623117] nfnl_acct: registering with nfnetlink.
+[   11.628259] ip_set: protocol 6
+[   11.631596] ip_tables: (C) 2000-2006 Netfilter Core Team
+[   11.637295] TCP: cubic registered
+[   11.640718] NET: Registered protocol family 17
+[   11.645640] Bluetooth: RFCOMM TTY layer initialized
+[   11.650722] Bluetooth: RFCOMM socket layer initialized
+[   11.656148] Bluetooth: RFCOMM ver 1.11
+[   11.660015] Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+[   11.665513] Bluetooth: BNEP filters: protocol multicast
+[   11.670945] Bluetooth: BNEP socket layer initialized
+[   11.676092] Bluetooth: HIDP (Human Interface Emulation) ver 1.2
+[   11.682203] Bluetooth: HIDP socket layer initialized
+[   11.687401] Key type dns_resolver registered
+[   11.693382] file system registered
+[   11.698275] using random self ethernet address
+[   11.702877] using random host ethernet address
+[   11.707966] android_usb gadget: Mass Storage Function, version: 2009/09/11
+[   11.715061] android_usb gadget: Number of LUNs=1
+[   11.719897]  lun0: LUN: removable file: (no medium)
+[   11.725155] android_usb gadget: android_usb ready
+[   11.730513] input: gpio-keys as /devices/platform/gpio-keys/input/input0
+[   11.737843] jz-rtc jz-rtc.0: setting system clock to 2014-08-21 12:00:00 UTC (1408622400)
+[   11.747867] cim_enable0,101
+[   11.750765] sensor_rst0,101
+[   11.753645] sensor_en0,100
+[   11.756511] soc-camera-pdrv soc-camera-pdrv: Probing soc-camera-pdrv
+[   12.260801] jz Camera driver attached to camera 0
+[   12.305468] jzmmc_v1.2 jzmmc_v1.2.0: card inserted, state=0
+[   12.442903] ov5640 0-003c: read sensor ov5640-front id high:0x56,low:40 successed!
+[   12.864571] jffs2: notice: (1) jffs2_build_xattr_subsystem: complete building xattr subsystem, 0 of xdatum (0 unchecked, 0 orphan) and 0 of xref (0.
+[   12.881652] VFS: Mounted root (jffs2 filesystem) on device 31:2.
+[   12.888967] Freeing unused kernel memory: 204K (8056d000 - 805a0000)
+mount: can't read '/proc/mounts': No such file or directory
+Starting logging: OK
+Starting mdev...
+Initializing random number generator... done.
+Starting network...
+Starting adb...
+[   13.740482] android_usb: already disabled
+Starting adb...
+killall: udhcpc: no process killed
+killall: udhcpd: no process killed
+killall: wpa_supplicant: no process killed
+killall: hostapd: no process killed
+# [   13.924702] adb_open
+[   13.927762] adb_bind_config
+ifconfig: SIOCGIFFLAGS: No such device
+easy setup start failed: 19(No such device)
+ifconfig: SIOCGIFFLAGS: No such device
+route: SIOCDELRT: No such device
+ifconfig: SIOCSIFADDR: No such device
+ifconfig: SIOCGIFFLAGS: No such device
+Successfully initialized wpa_supplicant
+Failed to open config file '/etc/wpa_supplicant.conf', error: No such file or directory
+Failed to read or parse configuration '/etc/wpa_supplicant.conf'.
+udhcpc: SIOCGIFINDEX: No such device
+
+# 
+# ./video0_fpscamera_x1000_442 
+
+ !!!!Warning!!!!
+ Max 1000 color bmp
+ Input the char: 
+
+ !!!!press o an capture 1 frame picture! 
+
+ !!!!press t an capture 10 frame picture! 
+
+ !!!!p/ress h an capture 100 frame picture! 
+[   23.117815] jz Camera driver attached to camera 0
+[   23.389320] ov5640 0-003c: ov5640_s_power: Init default
+[   23.420718] REG_CIM_CFG      =       0x00001c42
+[   23.424413] REG_CIM_CTRL     =       0x00000080
+[   23.428672] REG_CIM_CTRL2    =       0x00c00015
+[   23.432545] REG_CIM_STATE    =       0x00000002
+[   23.436866] REG_CIM_IMR      =       0x00000f0d
+[   23.440558] REG_CIM_IID      =       0x00000000
+[   23.444238] REG_CIM_DA       =       0x00000000
+[   23.448567] REG_CIM_FA       =       0x00000000
+[   23.452172] REG_CIM_FID      =       0x00000000
+[   23.456379] REG_CIM_CMD      =       0x00000000
+[   23.460071] REG_CIM_WSIZE    =       0x00000000
+[   23.463930] REG_CIM_WOFFSET  =       0x00000000
+[   23.468516] REG_CIM_FS       =       0x02cf44ff
+[   23.472120] REG_CIM_YFA      =       0x00000000
+[   23.476246] REG_CIM_YCMD     =       0x00000000
+[   23.480028] REG_CIM_CBFA     =       0x00000000
+[   23.483798] REG_CIM_CBCMD    =       0x00000000
+[   23.488182] REG_CIM_CRFA     =       0x00000000
+[   23.491964] REG_CIM_CRCMD    =       0x00000000
+[   23.496285] REG_CIM_TC       =       0x00000000
+[   23.499888] REG_CIM_TINX     =       0x00000000
+[   23.503657] REG_CIM_TCNT     =       0x00000000
+**** wyb01 Open camera video0 success!!!! fd=3
+
+...... pixelformat = ''YUYV'', description = ''YUYV'' 
+
+...... pixelformat = ''JZ12'', description = ''JZ 4:2:0:B'' 
+
+ capabilities= 0x04000001
+VIDIOC_G_FMT ret=0 
+[   23.537549] REG_CIM_CFG      =       0x00001c42
+[   23.541245] REG_CIM_CTRL     =       0x00000080
+[   23.545015] REG_CIM_CTRL2    =       0x00c00015
+[   23.549414] REG_CIM_STATE    =       0x00000002
+[   23.553286] REG_CIM_IMR      =       0x00000908
+[   23.557632] REG_CIM_IID      =       0x00000000
+[   23.561327] REG_CIM_DA       =       0x00000000
+[   23.564916] REG_CIM_FA       =       0x00000000
+[   23.569108] REG_CIM_FID      =       0x00000000
+[   23.572802] REG_CIM_CMD      =       0x00000000
+[   23.576952] REG_CIM_WSIZE    =       0x00000000
+[   23.580824] REG_CIM_WOFFSET  =       0x00000000
+[   23.584863] REG_CIM_FS       =       0x02cf44ff
+[   23.588976] REG_CIM_YFA      =       0x00000000
+[   23.592670] REG_CIM_YCMD     =       0x00000000
+[   23.596933] REG_CIM_CBFA     =       0x00000000
+[   23.600717] REG_CIM_CBCMD    =       0x00000000
+[   23.604576] REG_CIM_CRFA     =       0x00000000
+[   23.608888] REG_CIM_CRCMD    =       0x00000000
+[   23.612761] REG_CIM_TC       =       0x00000000
+[   23.617010] REG_CIM_TINX     =       0x00000000
+[   23.620794] REG_CIM_TCNT     =       0x00000000
+**** chenmuyuan77776666666fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_YUYV; ****
+pixelformat = ''YUYV''
+req.count=1
+ chenmuyuan767676767sizeof (*buffers) =0000000[   23.634136] ov5640 0-003c: stream on
+8
+**chenmuyuan 1**  buf.length=0 
+**cmy 2** i=1843200 buf.length=4905656, 
+**** i=0 buf.length=1843200, buffers[i].start=00000000 buf.m.offset=00000000
+

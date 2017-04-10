@@ -1,0 +1,290 @@
+[    0.000000] Initializing cgroup subsys cpuset
+[    0.000000] Initializing cgroup subsys cpu
+[    0.000000] Initializing cgroup subsys cpuacct
+[    0.000000] Linux version 3.10.14-dirty (root@yuzr-machine) (gcc version 4.7.2 (Ingenic 2015.02) ) #83 PREEMPT Fri Jul 1 17:06:23 CST 2016
+[    0.000000] bootconsole [early0] enabled
+[    0.000000] CPU0 RESET ERROR PC:801BBBC4
+[    0.000000] [<801bbbc4>] __delay+0x4/0x10
+[    0.000000] CPU0 revision is: 2ed1024f (Ingenic Xburst)
+[    0.000000] FPU revision is: 00330000
+[    0.000000] CCLK:1008MHz L2CLK:504Mhz H0CLK:200MHz H2CLK:200Mhz PCLK:100Mhz
+[    0.000000] Determined physical RAM map:
+[    0.000000]  memory: 00609000 @ 00010000 (usable)
+[    0.000000]  memory: 00037000 @ 00619000 (usable after init)
+[    0.000000] User-defined physical RAM map:
+[    0.000000]  memory: 01f00000 @ 00000000 (usable)
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x00000000-0x01efffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x00000000-0x01efffff]
+[    0.000000] On node 0 totalpages: 7936
+[    0.000000] free_area_init_node: node 0, pgdat 806156d0, node_mem_map 81000000
+[    0.000000]   Normal zone: 62 pages used for memmap
+[    0.000000]   Normal zone: 0 pages reserved
+[    0.000000]   Normal zone: 7936 pages, LIFO batch:0
+[    0.000000] Primary instruction cache 16kB, 4-way, VIPT, linesize 32 bytes.
+[    0.000000] Primary data cache 16kB, 4-way, VIPT, no aliases, linesize 32 bytes
+[    0.000000] pcpu-alloc: s0 r0 d32768 u32768 alloc=1*32768
+[    0.000000] pcpu-alloc: [0] 0 
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping off.  Total pages: 7874
+[    0.000000] Kernel command line: console=ttyS2,115200n8 mem=31M@0x0 ip=off init=/linuxrc rootfstype=jffs2 root=/dev/mtdblock2 rw
+[    0.000000] PID hash table entries: 128 (order: -3, 512 bytes)
+[    0.000000] Dentry cache hash table entries: 4096 (order: 2, 16384 bytes)
+[    0.000000] Inode-cache hash table entries: 2048 (order: 1, 8192 bytes)
+[    0.000000] Memory: 24368k/31744k available (4758k kernel code, 7376k reserved, 1417k data, 220k init, 0k highmem)
+[    0.000000] SLUB: HWalign=32, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] Preemptible hierarchical RCU implementation.
+[    0.000000] NR_IRQS:410
+[    0.000000] clockevents_config_and_register success.
+[    0.000000] Console: colour dummy device 80x25
+[    0.004584] Calibrating delay loop... 1001.88 BogoMIPS (lpj=5009408)
+[    0.047780] pid_max: default: 32768 minimum: 301
+[    0.052744] Mount-cache hash table entries: 512
+[    0.058145] Initializing cgroup subsys devices
+[    0.062592] Initializing cgroup subsys freezer
+[    0.067154] Initializing cgroup subsys blkio
+[    0.075112] NET: Registered protocol family 16
+[    0.098865] bio: create slab <bio-0> at 0
+[    0.104379] jz-dma jz-dma: JZ SoC DMA initialized
+[    0.109799] SCSI subsystem initialized
+[    0.113784] usbcore: registered new interface driver usbfs
+[    0.119452] usbcore: registered new interface driver hub
+[    0.125003] usbcore: registered new device driver usb
+[    0.130360]  (null): set:249  hold:250 dev=100000000 h=500 l=500
+[    0.136653]  (null): set:61  hold:62 dev=100000000 h=125 l=125
+[    0.142635] Linux video capture interface: v2.00
+[    0.147564] Advanced Linux Sound Architecture Driver Initialized.
+[    0.154237] Bluetooth: Core ver 2.16
+[    0.157922] NET: Registered protocol family 31
+[    0.162350] Bluetooth: HCI device and connection manager initialized
+[    0.168841] Bluetooth: HCI socket layer initialized
+[    0.173745] Bluetooth: L2CAP socket layer initialized
+[    0.178906] Bluetooth: SCO socket layer initialized
+[    0.185770] Switching to clocksource jz_clocksource
+[    0.195220] cfg80211: Calling CRDA to update world regulatory domain
+[    0.203670] jz-dwc2 jz-dwc2: regulator vbus get error
+[    0.208792] DWC IN OTG MODE
+[    0.213618] sft id ==================== 1
+[    0.367086] dwc2 dwc2: Dynamic Power Control
+[    0.371386] dwc2 dwc2: Using Buffer DMA mode
+[    0.574757] dwc2 dwc2: Core Release: 3.00a
+[    0.578870] dwc2 dwc2: DesignWare USB2.0 High-Speed Host Controller
+[    0.585234] dwc2 dwc2: new USB bus registered, assigned bus number 1
+[    0.592474] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+[    0.599299] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    0.606716] usb usb1: Product: DesignWare USB2.0 High-Speed Host Controller
+[    0.613726] usb usb1: Manufacturer: Linux 3.10.14-dirty dwc2-hcd
+[    0.619798] usb usb1: SerialNumber: dwc2
+[    0.624278] hub 1-0:1.0: USB hub found
+[    0.628025] hub 1-0:1.0: 1 port detected
+[    0.632329] dwc2 dwc2: DWC2 Host Initialized
+[    0.637022] Suspend otg by shutdown dwc cotroller and phy
+[    0.642518] DIS PHY
+[    0.644918] Resume otg by reinit dwc controller and phy
+[    0.650206] DWC IN OTG MODE
+[    0.655046] dwc2 dwc2: enter dwc2_gadget_plug_change:2589: plugin = 1 pullup_on = 0 suspend = 0
+[    0.664382] NET: Registered protocol family 2
+[    0.669452] TCP established hash table entries: 512 (order: 0, 4096 bytes)
+[    0.676485] TCP bind hash table entries: 512 (order: 1, 10240 bytes)
+[    0.682923] TCP: Hash tables configured (established 512 bind 512)
+[    0.689227] TCP: reno registered
+[    0.692476] UDP hash table entries: 256 (order: 1, 12288 bytes)
+[    0.698475] UDP-Lite hash table entries: 256 (order: 1, 12288 bytes)
+[    0.705327] NET: Registered protocol family 1
+[    0.710155] Total 4MB memory at 0xc00000 was reserved for IPU
+[    0.716395] 359,init_ddr_proc
+[    0.726649] NTFS driver 2.1.30 [Flags: R/O].
+[    0.731587] jffs2: version 2.2. (NAND) © 2001-2006 Red Hat, Inc.
+[    0.738303] fuse init (API version 7.22)
+[    0.742838] msgmni has been set to 47
+[    0.748953] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 253)
+[    0.756569] io scheduler noop registered
+[    0.760467] io scheduler deadline registered
+[    0.765065] io scheduler cfq registered (default)
+[    0.770085] truly_tft240240_slcd truly_tft240240_slcd.0: lcd device(TRULY TFT240240) register success
+[    0.779501] ======truly_tft240240_power_init==============
+[    0.785099] set lcd_power.inited  =======1 
+[    0.824337] ------------------------------------------------
+[    0.829847] pwm-backlight pwm-backlight.0: unable to request PWM, trying legacy API
+[    0.843148] jz-uart.0: ttyS0 at MMIO 0x10030000 (irq = 59) is a uart0
+[    0.849859] jz-uart.2: ttyS2 at MMIO 0x10032000 (irq = 57) is a uart2
+[    0.856467] console [ttyS2] enabled, bootconsole disabled
+[    0.867919] register vprivilege driver OK! Major = 252
+[    0.873420] register vprivilege driver OK! Major = 251
+[    0.879400] at24 1-0057: 2048 byte at24 EEPROM, writable, 16 bytes/write
+[    0.886711] jkzhao++++++++AP6212 BT probe ok
+[    0.892272] the id code = c84018, the flash name is GD25Q128C
+[    0.898204] the flash->board_info->quad_mode = 6b
+[    0.903109] JZ SFC Controller for SFC channel 0 driver register
+[    0.909216] Creating 3 MTD partitions on "sfc_mtd":
+[    0.914289] 0x000000000000-0x000000040000 : "bootloader"
+[    0.920600] 0x000000040000-0x000000340000 : "kernel"
+[    0.926576] 0x000000360000-0x000000fe0000 : "userfs"
+[    0.932563] SPI NOR MTD LOAD OK
+[    0.935815] create sfc norflash info sysfs attr_group sucontinues
+[    0.952371] Bus Mode Reg after reset: 0x00020101, cnt=0
+[    0.961775] libphy: jz_mii_bus: probed
+[    0.965791] =======>gmacdev = 0x80aa0d80<================
+[    0.971454] =========>gmacdev->MacBase = 0xb34b0000 DmaBase = 0xb34b1000
+[    0.978362] Bus Mode Reg after reset: 0x00020101, cnt=0
+[    0.985521] jz_mac jz_mac.0: JZ on-chip Ethernet MAC driver, Version 1.0
+[    0.992769] usbcore: registered new interface driver usb-storage
+[    0.999481] jz-rtc jz-rtc.0: rtc core: registered jz-rtc as rtc0
+[    1.006591] i2c /dev entries driver
+[    1.010895] usbcore: registered new interface driver uvcvideo
+[    1.016822] USB Video Class driver (1.1.1)
+[    1.021117] Bluetooth: HCI UART driver ver 2.2
+[    1.025699] Bluetooth: HCI H4 protocol initialized
+[    1.030631] Bluetooth: HCILL protocol initialized
+[    1.070771] jzmmc_v1.2 jzmmc_v1.2.0: register success!
+[    1.110749] jzmmc_v1.2 jzmmc_v1.2.1: register success!
+[    1.116412] usbcore: registered new interface driver usbhid
+[    1.122282] usbhid: USB HID core driver
+[    1.127456] jz-asoc-aic jz-asoc-aic: Aic core probe success
+[    1.134588] jz-asoc-aic-i2s jz-asoc-aic-i2s: i2s platform probe success
+[    1.143693] icdc-d3 icdc-d3: codec icdc-d3 platfrom probe success
+[    1.150207] jz-asoc-pcm jz-asoc-pcm: pcm platform probe success
+[    1.157160] icdc-d3 icdc-d3: codec icdc-d3 probe enter
+[    1.440697] write extend : sreg: 3 [0 - 4], creg: 10 sdata: 92
+[    1.447726] codec_platform_data gpio_spk_en is NULL
+[    1.453022] dma dma0chan4: Channel 4 have been requested.(phy id 3,type 0x06 desc a0ad9000)
+[    1.461908] dma dma0chan5: Channel 5 have been requested.(phy id 2,type 0x06 desc a0ada000)
+[    1.470810] ingenic-alsa ingenic-alsa.0:  icdc-d3-hifi <-> jz-asoc-aic-i2s mapping ok
+[    1.479396] dma dma0chan0: Channel 0 have been requested.(phy id 7,type 0x20 desc a0adb000)
+[    1.488328] dma dma0chan1: Channel 1 have been requested.(phy id 6,type 0x20 desc a0adc000)
+[    1.497234] ingenic-alsa ingenic-alsa.0:  pcm dump dai <-> jz-asoc-pcm mapping ok
+[    1.505572] dma dma0chan7: Channel 7 have been requested.(phy id 0,type 0x04 desc a0adf000)
+[    1.514447] ingenic-alsa ingenic-alsa.0:  dmic dump dai <-> jz-asoc-dmic mapping ok
+[    1.524216] Netfilter messages via NETLINK v0.30.
+[    1.529085] nfnl_acct: registering with nfnetlink.
+[    1.534294] ip_set: protocol 6
+[    1.537631] ip_tables: (C) 2000-2006 Netfilter Core Team
+[    1.543340] TCP: cubic registered
+[    1.546762] NET: Registered protocol family 17
+[    1.551647] Bluetooth: RFCOMM TTY layer initialized
+[    1.556721] Bluetooth: RFCOMM socket layer initialized
+[    1.562180] Bluetooth: RFCOMM ver 1.11
+[    1.566050] Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+[    1.571554] Bluetooth: BNEP filters: protocol multicast
+[    1.576964] Bluetooth: BNEP socket layer initialized
+[    1.582102] Bluetooth: HIDP (Human Interface Emulation) ver 1.2
+[    1.588212] Bluetooth: HIDP socket layer initialized
+[    1.594344] BCM:dhd_module_init in
+[    1.597896] BCM:found wifi platform device bcmdhd_wlan
+[    1.603396] BCM:Power-up adapter 'DHD generic adapter'
+[    1.608753] BCM:wifi_platform_set_power = 1
+[    1.613105] BCM:=========== WLAN placed in NOMAL ON========
+[    1.689982] mmc1: new high speed SDIO card at address 0001
+[    1.857402] dhd_customer_oob_irq_map,host_oob_irq = 152
+[    1.864515] BCM:F1 signature OK, socitype:0x1 chip:0xa9a6 rev:0x0 pkg:0x4
+[    1.872200] BCM:DHD: dongle ram size is set to 524288(orig 524288) at 0x0
+[    1.879392] BCM:wifi_platform_get_mac_addr
+[    1.884808] wl_create_event_handler(): thread:wl_event_handler:29 started
+[    1.891899] BCM:6CFG80211-ERROR) wl_event_handler : BCM:tsk Enter, tsk = 0x80b414cc
+[    1.900284] dhd_attach(): thread:dhd_watchdog_thread:2a started
+[    1.906569] dhd_attach(): thread:dhd_dpc:2b started
+[    1.911779] dhd_attach(): thread:dhd_rxf:2c started
+[    1.916826] BCM:dhd_deferred_work_init: work queue initialized 
+[    1.923319] BCM:Dongle Host Driver, version 1.141.66
+[    1.923319] Compiled in drivers/net/wireless/bcmdhd on May  7 2016 at 13:12:00
+[    1.936481] BCM:Register interface [wlan0]  MAC: 00:90:4c:11:22:33
+[    1.936481] 
+[    1.944460] BCM:dhd_prot_ioctl : bus is down. we have nothing to do
+[    1.951099] BCM:wifi_platform_set_power = 0
+[    1.955411] BCM:=========== WLAN placed in NOMAL OFF ========
+[    1.961824] file system registered
+[    1.966534] using random self ethernet address
+[    1.971260] using random host ethernet address
+[    1.976194] android_usb gadget: Mass Storage Function, version: 2009/09/11
+[    1.983400] android_usb gadget: Number of LUNs=1
+[    1.988164]  lun0: LUN: removable file: (no medium)
+[    1.993503] android_usb gadget: android_usb ready
+[    1.998748] input: gpio-keys as /devices/platform/gpio-keys/input/input0
+[    2.006140] jz-rtc jz-rtc.0: setting system clock to 2016-07-01 09:18:07 UTC (1467364687)
+[    2.014760] cim_enable0,101
+[    2.017654] sensor_rst0,101
+[    2.020532] sensor_en0,100
+[    2.023382] soc-camera-pdrv soc-camera-pdrv: Probing soc-camera-pdrv
+[    2.527679] jz Camera driver attached to camera 0
+[    2.551277] ov7740 0-0021: -----ov7740_video_probe----
+[    2.707044] ov7740 0-0021: read sensor ov7740 id high:0x77,low:42 successed!
+[    2.863720] ov7740 0-0021: -----ov7740_enum_fmt----
+[    2.868751] ov7740 0-0021: -----ov7740_enum_fmt----
+[    2.873833] ov7740 0-0021: -----ov7740_enum_fmt----
+[    2.879056] ov7740 0-0021: -----ov7740_g_fmt----
+[    2.884130] ALSA device list:
+[    2.887194]   #0: phoenix
+[    3.248712] jffs2: notice: (1) jffs2_build_xattr_subsystem: complete building xattr subsystem, 0 of xdatum (0 unchecked, 0 orphan) and 0 of xref (0 dead, 0 orphan) found.
+[    3.266102] VFS: Mounted root (jffs2 filesystem) on device 31:2.
+[    3.273485] Freeing unused kernel memory: 220K (80619000 - 80650000)
+[    4.084459] android_usb: already disabled
+[    4.388724] adb_open
+[    4.397261] adb_bind_config
+[    4.553281] android_work: sent uevent USB_STATE=CONNECTED
+[    4.622100] android_usb gadget: high-speed config #1: android
+[    4.628680] android_work: sent uevent USB_STATE=CONFIGURED
+[   25.366531] jz Camera driver attached to camera 0
+[   25.390745] ov7740 0-0021: -----ov7740_s_power----
+[   25.545953] ov7740 0-0021: -----ov7740_try_fmt----
+[   25.551570] ov7740 0-0021: -----ov7740_s_fmt----
+[   25.576463] ov7740 0-0021: ov7740_init: Init default
+[   25.582009] ov7740 0-0021: -----ov7740_g_mbus_config----
+[   25.587501] jz-cim jz-cim.0: ================>V4L2_MBUS_VSYNC_ACTIVE_NONE
+[   25.594997] jz-cim jz-cim.0: ================>vsync active rigsing
+[   25.601994] jz-cim jz-cim.0: ================>hsync active rigsing
+[   25.608378] REG_CIM_CFG	=	0x00001c42
+[   25.612666] REG_CIM_CTRL	=	0x00000080
+[   25.616450] REG_CIM_CTRL2	=	0x00c00015
+[   25.620309] REG_CIM_STATE	=	0x00000002
+[   25.624777] REG_CIM_IMR	=	0x00000f0d
+[   25.628469] REG_CIM_IID	=	0x00000000
+[   25.632627] REG_CIM_DA	=	0x00000000
+[   25.636229] REG_CIM_FA	=	0x00000000
+[   25.639819] REG_CIM_FID	=	0x00000000
+[   25.644035] REG_CIM_CMD	=	0x00000000
+[   25.647728] REG_CIM_WSIZE	=	0x00000000
+[   25.652050] REG_CIM_WOFFSET	=	0x00000000
+[   25.656100] REG_CIM_FS	=	0x01df427f
+[   25.659691] REG_CIM_YFA	=	0x00000000
+[   25.663905] REG_CIM_YCMD	=	0x00000000
+[   25.667687] REG_CIM_CBFA	=	0x00000000
+[   25.672095] REG_CIM_CBCMD	=	0x00000000
+[   25.675967] REG_CIM_CRFA	=	0x00000000
+[   25.679737] REG_CIM_CRCMD	=	0x00000000
+[   25.684249] REG_CIM_TC	=	0x00000000
+[   25.687853] REG_CIM_TINX	=	0x00000000
+[   25.692257] REG_CIM_TCNT	=	0x00000000
+[   25.696252] ov7740 0-0021: -----ov7740_cropcap----
+[   25.706049] ov7740 0-0021: -----ov7740_g_crop----
+[   25.711571] ov7740 0-0021: -----ov7740_try_fmt----
+[   25.716528] ov7740 0-0021: -----ov7740_s_fmt----
+[   25.746372] ov7740 0-0021: ov7740_init: Init default
+[   25.751903] ov7740 0-0021: -----ov7740_g_mbus_config----
+[   25.757395] jz-cim jz-cim.0: ================>V4L2_MBUS_VSYNC_ACTIVE_NONE
+[   25.764885] jz-cim jz-cim.0: ================>vsync active rigsing
+[   25.771838] jz-cim jz-cim.0: ================>hsync active rigsing
+[   25.778221] REG_CIM_CFG	=	0x00001c42
+[   25.782491] REG_CIM_CTRL	=	0x00000080
+[   25.786274] REG_CIM_CTRL2	=	0x00c00015
+[   25.790133] REG_CIM_STATE	=	0x00000002
+[   25.794601] REG_CIM_IMR	=	0x00000908
+[   25.798294] REG_CIM_IID	=	0x00000000
+[   25.802455] REG_CIM_DA	=	0x00000000
+[   25.806057] REG_CIM_FA	=	0x00000000
+[   25.809648] REG_CIM_FID	=	0x00000000
+[   25.813859] REG_CIM_CMD	=	0x00000000
+[   25.817551] REG_CIM_WSIZE	=	0x00000000
+[   25.821871] REG_CIM_WOFFSET	=	0x00000000
+[   25.825921] REG_CIM_FS	=	0x01df427f
+[   25.829512] REG_CIM_YFA	=	0x00000000
+[   25.833771] REG_CIM_YCMD	=	0x00000000
+[   25.837553] REG_CIM_CBFA	=	0x00000000
+[   25.841983] REG_CIM_CBCMD	=	0x00000000
+[   25.845856] REG_CIM_CRFA	=	0x00000000
+[   25.849627] REG_CIM_CRCMD	=	0x00000000
+[   25.854136] REG_CIM_TC	=	0x00000000
+[   25.857740] REG_CIM_TINX	=	0x00000000
+[   25.862140] REG_CIM_TCNT	=	0x00000000
+[   25.866233] ov7740 0-0021: -----ov7740_s_stream----
+[   65.911268] ov7740 0-0021: -----ov7740_s_power----

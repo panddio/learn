@@ -1,0 +1,4 @@
+修改的文件及其所在目录：
+drivers/media/platform/soc_camera/jz_camera_v13.c
+arch/mips/xburst/soc-x1000/include/mach/jz_camera.h
+drivers/media/i2c/soc_camera/ov7740.c
