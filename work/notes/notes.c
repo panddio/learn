@@ -310,6 +310,9 @@ kernel/arch/mips/xburst/soc-m200/chip-m200/watch/acrab$ gitk sound.c
 kernel/arch/mips/xburst/soc-m200/chip-m200/watch/common$ gitk sound.c
 ======================================================================
 zlm60 编译：
+代码获取：
+repo init -u ssh://wangqiuwei@194.169.1.31:29418/mirror/linux-x1000/manifest.git
+
 platform/
 source tools/build/source.sh
 make
@@ -1896,7 +1899,7 @@ ta xxx 跳转到标签 xxx 定义的地方
 :stag xxx 在分割窗口中查看包含 xxx 的文件
 ======================================================================
 获取31服务器上的Manhhatan/halley2代码:
-repo init -u ssh://wangqiuwei@194.169.1.31:29418/mirror/Manhhatan/halley2/platform/manifest.git -b ingenic-linux-kernel3.10.14-halley2-v2.0-20160411 -m boards/halley2.xml
+repo init -u ssh://wangqiuwei@194.169.1.31:29418/mirror/Manhhatan/halley2/platform/manifest.git -b ingenic-linux-kernel3.10.14-halley2-v2.0-20160905 -m boards/halley2.xml
 
 ----------------------------------------------------------------------
 获取31服务器上的mozart代码:
@@ -2251,7 +2254,16 @@ cpio 备份命令
 -B   ：让预设的blocks可以增加到5120bytes，默认是512bytes，这样可以使备份速度加快
 -d   ：自动建立目录，这样还原时才不会出现找不到路径的问题
 -u   ：更新，用较新的文件覆盖旧的文件
-cpio常与find 配合使用 
+cpio常与find 配合使用
+
+
+先解开 root-nand.cpio
+mkdir root-nand
+cd root-nand
+sudo cpio -idm < ../root-nand.cpio
+cp -a ../recovery sbin/
+重新打包
+find ./ -print | cpio -H newc -ov > ../root-nand.cpio
 ======================================================================
 ov5640 sysclock registers:
 0x3034:
@@ -2456,6 +2468,8 @@ Gerrit 添加一个已经有的git工程到gerrit服务器
 服务器：
 添加用户 "aaa": htpasswd etc/passwords aaa
 ======================================================================
+ISP(Image Signal Processing 中文译为“图形信号处理”
+
 BF3703
 0x03 VHREF
 VREF and HREF control.
@@ -2508,4 +2522,12 @@ sed -i 's/.\/$(LOADER_NAME)[ ]\+[0-9a-z]\+[ ]\+[0-9]\+/.\/$(LOADER_NAME) $(APP_O
 
 ======================================================================
 git clone ssh://wangqiuwei@194.169.1.31:29418/linux-recovery
+======================================================================
+安装 libffi
+sed -e '/^includesdir/ s/$(libdir).*$/$(includedir)/' \
+    -i include/Makefile.in && sed -e '/^includedir/ s/=.*$/=@includedir@/' \
+    -e 's/^Cflags: -I${includedir}/Cflags:/' \
+    -i libffi.pc.in        &&./configure --prefix=/usr --disable-static && make
+======================================================================
+sudo autoreconf -ivf  
 
