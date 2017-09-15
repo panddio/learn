@@ -112,17 +112,17 @@ void firewall_build_rule(TYPE_Route *rt, const char *rule, char flag)
 *****************************************************************************/
 void delete_firewall_rule(TYPE_Route *rt, const char *rule)
 {
-	if(strncmp(rules[0], rule, strlen(rules[0])) == 0){ 	
+	if(strncmp(rules[0], rule, strlen(rules[0])) == 0){
 		rt->ip_head = (FIRE_Wall *)delete_firewall_node(rt->ip_head, rule);
 	}
 	else if(strncmp(rules[1], rule, strlen(rules[1])) == 0){
 		rt->mac_head = (FIRE_Wall *)delete_firewall_node(rt->ip_head, rule);
-	}	
+	}
 	else if(strncmp(rules[2], rule, strlen(rules[2])) == 0){
 		rt->port_head = (FIRE_Wall *)delete_firewall_node(rt->ip_head, rule);
-	}	
+	}
 	else{
-		
+
 		int i = 0;
 
 		for(i = 3; i < sizeof(rules)/sizeof(rules[0]); i++)
@@ -133,7 +133,6 @@ void delete_firewall_rule(TYPE_Route *rt, const char *rule)
 		   }
 		}
 	}
-
 }
 
 /*****************************************************************************
@@ -147,7 +146,7 @@ void delete_firewall_rule(TYPE_Route *rt, const char *rule)
 static int firewall_filt_ip(TYPE_Route *rt, MSG_Info *pinfo)
 {
 	if(rt->ip_head != NULL){
-		
+
 		uchar type[16];
 		uchar ip[16];
 		uchar src_ip[16] = "";
@@ -156,11 +155,11 @@ static int firewall_filt_ip(TYPE_Route *rt, MSG_Info *pinfo)
 		struct _firewall *pnode = NULL;
 		pnode = rt->ip_head;
 
-		//提取目的ip	
+		//提取目的ip
 		sprintf(dst_ip,"%d.%d.%d.%d",\
 		pinfo->dst_ip[0],pinfo->dst_ip[1],pinfo->dst_ip[2],pinfo->dst_ip[3]);
-		
-		//提取源ip	
+
+		//提取源ip
 		sprintf(src_ip,"%d.%d.%d.%d",\
 		pinfo->src_ip[0],pinfo->src_ip[1],pinfo->src_ip[2],pinfo->src_ip[3]);
 
@@ -182,7 +181,7 @@ static int firewall_filt_ip(TYPE_Route *rt, MSG_Info *pinfo)
 				else {
 					if(strcmp(src_ip, type) == 0 || \
 					   strcmp(dst_ip, type) == 0){
-						return -1;					
+						return -1;
 					}
 				}
 			}
@@ -195,11 +194,11 @@ static int firewall_filt_ip(TYPE_Route *rt, MSG_Info *pinfo)
 				if(strcmp(dst_ip, ip) == 0) {
 					return -1;
 				}
-			}	
+			}
 			else {
 				rt->mac_head = (FIRE_Wall *)delete_firewall_node(rt->ip_head, pnode->rule);
 			}
-			
+
 			pnode = pnode->next;
 		}
 	}
@@ -223,16 +222,16 @@ static int firewall_filt_mac(TYPE_Route *rt, MSG_Info *pinfo)
 		uchar mac[18];
 		uchar dst_mac[18] = "";
 		uchar src_mac[18] = "";
-		
+
 		struct _firewall *pnode = NULL;
 		pnode = rt->mac_head;
-		
+
 		//提取目的mac
 		sprintf(dst_mac,"%02x:%02x:%02x:%02x:%02x:%02x",\
 			   pinfo->dst_mac[0],pinfo->dst_mac[1],pinfo->dst_mac[2],\
 			   pinfo->dst_mac[3],pinfo->dst_mac[4],pinfo->dst_mac[5]);
-		
-		//提取源mac		
+
+		//提取源mac
 		sprintf(src_mac,"%02x:%02x:%02x:%02x:%02x:%02x",\
 			pinfo->src_mac[0],pinfo->src_mac[1],pinfo->src_mac[2],\
 			pinfo->src_mac[3],pinfo->src_mac[4],pinfo->src_mac[5]);
@@ -255,9 +254,9 @@ static int firewall_filt_mac(TYPE_Route *rt, MSG_Info *pinfo)
 				else {
 					if(strcmp(src_mac, type) == 0 || \
 					   strcmp(src_mac, type) == 0){
-						return -1;					
+						return -1;
 					}
-				}				
+				}
 			}
 			else if(strcmp(type, "src") == 0) {
 				if(strcmp(src_mac, mac) == 0){
@@ -268,7 +267,7 @@ static int firewall_filt_mac(TYPE_Route *rt, MSG_Info *pinfo)
 				if(strcmp(dst_mac, mac) == 0) {
 					return -1;
 				}
-			}	
+			}
 			else {
 				rt->mac_head = (FIRE_Wall *)delete_firewall_node(rt->mac_head, pnode->rule);
 			}
@@ -294,9 +293,9 @@ static int firewall_filt_port(TYPE_Route *rt, MSG_Info *pinfo)
 
 		uchar type[6];
 		uchar port[6];
-		
+
 		uint16 port_val = 0;
-		
+
 		struct _firewall *pnode = NULL;
 		pnode = rt->port_head;
 
@@ -311,9 +310,9 @@ static int firewall_filt_port(TYPE_Route *rt, MSG_Info *pinfo)
 				port_val = (uint16)atoi(port);
 			else
 				port_val = (uint16)atoi(type);
-			
+
 			if(strcmp(type, "host") == 0 || strlen(port) == 0) {
-				
+
 				if(port_val == pinfo->s_port || \
 				   port_val == pinfo->d_port){
 					return -1;
@@ -328,14 +327,14 @@ static int firewall_filt_port(TYPE_Route *rt, MSG_Info *pinfo)
 				if(port_val == pinfo->d_port) {
 					return -1;
 				}
-			}	
+			}
 			else {
 				rt->mac_head = (FIRE_Wall *)delete_firewall_node(rt->port_head, pnode->rule);
 			}
 
-			pnode = pnode->next;			
+			pnode = pnode->next;
 		}
-	}	
+	}
 
 	return 0;
 }
@@ -353,7 +352,7 @@ static int firewall_filt_protocol(TYPE_Route *rt, MSG_Info *pinfo)
 	if(rt->pro_head != NULL){
 
 		uchar part[4][18];
-		
+
 		struct _firewall *pnode = NULL;
 		pnode = rt->pro_head;
 
@@ -362,7 +361,7 @@ static int firewall_filt_protocol(TYPE_Route *rt, MSG_Info *pinfo)
 			sscanf(pnode->rule, "%s %s %s %s", *(part+0), *(part+1), *(part+2), *(part+3));
 
 			if(strlen(*(part+1)) == 0){
-				
+
 				if(strcmp(*(part+0), "arp") == 0){
 					if(pinfo->frame_type == 0x0806){
 						return -1;
@@ -407,19 +406,19 @@ static int firewall_filt_protocol(TYPE_Route *rt, MSG_Info *pinfo)
 					rt->pro_head = (FIRE_Wall *)delete_firewall_node(rt->pro_head, pnode->rule);
 				}
 			}
-			
+
 			else {
 				if(strcmp(*(part+1), "mac")) {
-					
+
 					uchar dst_mac[18] = "";
 					uchar src_mac[18] = "";
-					
+
 					//提取目的mac
 					sprintf(dst_mac,"%02x:%02x:%02x:%02x:%02x:%02x",\
 						   pinfo->dst_mac[0],pinfo->dst_mac[1],pinfo->dst_mac[2],\
 						   pinfo->dst_mac[3],pinfo->dst_mac[4],pinfo->dst_mac[5]);
-					
-					//提取源mac 	
+
+					//提取源mac
 					sprintf(src_mac,"%02x:%02x:%02x:%02x:%02x:%02x",\
 						pinfo->src_mac[0],pinfo->src_mac[1],pinfo->src_mac[2],\
 						pinfo->src_mac[3],pinfo->src_mac[4],pinfo->src_mac[5]);
@@ -435,9 +434,9 @@ static int firewall_filt_protocol(TYPE_Route *rt, MSG_Info *pinfo)
 						else {
 							if(strcmp(src_mac, *(part+2)) == 0 || \
 							   strcmp(src_mac, *(part+2)) == 0){
-								return -1;					
+								return -1;
 							}
-						}				
+						}
 					}
 					else if(strcmp(*(part+2), "src") == 0) {
 						if(strcmp(src_mac, *(part+3)) == 0){
@@ -448,21 +447,21 @@ static int firewall_filt_protocol(TYPE_Route *rt, MSG_Info *pinfo)
 						if(strcmp(dst_mac, *(part+3)) == 0) {
 							return -1;
 						}
-					}	
+					}
 					else {
 						rt->pro_head = (FIRE_Wall *)delete_firewall_node(rt->pro_head, pnode->rule);
-					}					
+					}
 				}
 				else if(strcmp(*(part+1), "ip")) {
-					
+
 					uchar src_ip[16] = "";
 					uchar dst_ip[16] = "";
 
-					//提取目的ip	
+					//提取目的ip
 					sprintf(dst_ip,"%d.%d.%d.%d",\
 					pinfo->dst_ip[0],pinfo->dst_ip[1],pinfo->dst_ip[2],pinfo->dst_ip[3]);
-					
-					//提取源ip	
+
+					//提取源ip
 					sprintf(src_ip,"%d.%d.%d.%d",\
 					pinfo->src_ip[0],pinfo->src_ip[1],pinfo->src_ip[2],pinfo->src_ip[3]);
 
@@ -477,7 +476,7 @@ static int firewall_filt_protocol(TYPE_Route *rt, MSG_Info *pinfo)
 						else {
 							if(strcmp(src_ip, *(part+2)) == 0 || \
 							   strcmp(dst_ip, *(part+2)) == 0){
-								return -1;					
+								return -1;
 							}
 						}
 					}
@@ -490,10 +489,10 @@ static int firewall_filt_protocol(TYPE_Route *rt, MSG_Info *pinfo)
 						if(strcmp(dst_ip, *(part+3)) == 0) {
 							return -1;
 						}
-					}	
+					}
 					else {
 						rt->pro_head = (FIRE_Wall *)delete_firewall_node(rt->pro_head, pnode->rule);
-					}					
+					}
 				}
 				else if(strcmp(*(part+1), "port")) {
 
@@ -504,7 +503,7 @@ static int firewall_filt_protocol(TYPE_Route *rt, MSG_Info *pinfo)
 						port_val = (uint16)atoi(*(part+2));
 
 					if(strcmp(*(part+2), "host") == 0 || strlen(*(part+3)) == 0) {
-			
+
 					if(port_val == pinfo->s_port || \
 					   port_val == pinfo->d_port){
 						return -1;
@@ -519,18 +518,18 @@ static int firewall_filt_protocol(TYPE_Route *rt, MSG_Info *pinfo)
 						if(port_val == pinfo->d_port) {
 							return -1;
 						}
-					}	
+					}
 					else {
 						rt->pro_head = (FIRE_Wall *)delete_firewall_node(rt->pro_head, pnode->rule);
 					}
 				}
 				else {
 					rt->pro_head = (FIRE_Wall *)delete_firewall_node(rt->pro_head, pnode->rule);
-				}				
+				}
 			}
-		
+
 			pnode = pnode->next;
-		}		
+		}
 	}
 }
 
@@ -554,22 +553,22 @@ int firewall_filt(TYPE_Route *rt, MSG_Info *pinfo)
 		ret = firewall_filt_mac(rt, pinfo);
 		if(ret < 0) return -1;
 	}
-		
+
 	pinfo->frame_type = ntohs(rt->eth_hdr->ether_type);
 
 	if(pinfo->frame_type == 0x0800) {
 		//recv+14 跳过mac头
 		rt->ip_hdr = (struct iphdr *)(rt->recv + 14);
-		
+
 		memcpy(pinfo->src_ip, (uchar *)&rt->ip_hdr->saddr, 4);
 		memcpy(pinfo->dst_ip, (uchar *)&rt->ip_hdr->daddr, 4);
 
 		pinfo->pro_type = rt->ip_hdr->protocol;
-		
+
 		switch(pinfo->pro_type)
-		{	
+		{
 			case 6:
-			{	// rt->ip_hdr->ihl * 4	跳过ip头部	
+			{	// rt->ip_hdr->ihl * 4	跳过ip头部
 				rt->udp_hdr = (struct udphdr *)(rt->recv + 14 + rt->ip_hdr->ihl * 4);
 
 				pinfo->s_port = ntohs(rt->udp_hdr->source);
@@ -590,7 +589,7 @@ int firewall_filt(TYPE_Route *rt, MSG_Info *pinfo)
 			ret = firewall_filt_port(rt, pinfo);
 			if(ret < 0) return -1;
 		}
-		
+
 	}
 	else if(pinfo->frame_type == 0x0806) {
 		rt->arp_hdr = (struct _arphdr *)(rt->recv + 14);
@@ -602,11 +601,11 @@ int firewall_filt(TYPE_Route *rt, MSG_Info *pinfo)
 	if(rt->fire_status == UP){
 		ret = firewall_filt_ip(rt, pinfo);
 		if(ret < 0) return -1;
-		
+
 		ret = firewall_filt_protocol(rt, pinfo);
 		if(ret < 0) return -1;
 	}
-	
+
 	return 0;
 }
 

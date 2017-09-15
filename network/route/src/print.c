@@ -30,22 +30,22 @@ void show_help(void)
 	printf("-   fire on: 开启防火墙                             *\n");
 	printf("-  fire off: 关闭防火墙                             *\n");
 	printf("-    lsfire: 查看防火墙规则                         *\n");
-	printf("-   setfire: 设置防火墙规则                         *\n");	
+	printf("-   setfire: 设置防火墙规则                         *\n");
 	printf("*****************************************************\n");
 }
 
 
 void firewall_rule_set_help(void)
 {
-	printf("*************************************************************************\n");
-	printf("-               >>>   温馨提示: ()是可选选项  <<<                       *\n");
-	printf("-设置 ip 过滤规则，格式:    ip (opt) <ip>   -> ip (src) 192.168.1.1     *\n");
-	printf("-设置 mac过滤规则，格式:   mac (opt) <mac>  -> mac (dst) 192.168.1.1    *\n");
-	printf("-设置端口过滤规则，格式:  port (opt) <port> -> port (host) 8000         *\n");
-	printf("-设置协议过滤规则，格式: <pro> (type) (opt) (type_val) -> udp port 8000 *\n");
-	printf("-删除已设置的规则，输入: -d <要删除的规则>                              *\n");
-	printf("-查看设置规则帮助，输入: -h                                             *\n");
-	printf("-查看已设置的规则，输入: ls                                             *\n");
-	printf("-退出防火墙设置，  输入: esc                                            *\n");
-	printf("*************************************************************************\n");
+	printf("****************************************************************************\n");
+	printf("-                >>>   温馨提示: ()是可选选项  <<<                         *\n");
+	printf("-设置 ip 过滤规则，格式:    ip (opt) <ip>   -> ip (src) 192.168.1.1        *\n");
+	printf("-设置 mac过滤规则，格式:   mac (opt) <mac>  -> mac (dst) 11:22:33:aa:bb:cc *\n");
+	printf("-设置端口过滤规则，格式:  port (opt) <port> -> port (host) 8000            *\n");
+	printf("-设置协议过滤规则，格式: <pro> (type) (opt) (type_val) -> udp port 8000    *\n");
+	printf("-删除已设置的规则，输入: -d <要删除的规则>                                 *\n");
+	printf("-查看设置规则帮助，输入: -h                                                *\n");
+	printf("-查看已设置的规则，输入: ls                                                *\n");
+	printf("-退出防火墙设置，  输入: esc                                               *\n");
+	printf("****************************************************************************\n");
 }

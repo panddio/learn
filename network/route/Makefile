@@ -15,6 +15,8 @@ CC = gcc
 INCFAG = -I$(DIR_INC)
 CFLAGES = -lpthread
 
+$(shell test -e obj || mkdir obj)
+
 $(BIN_TARGET):$(OBJ)
 	$(CC) $(OBJ)  -o $@ $(CFLAGES)
 

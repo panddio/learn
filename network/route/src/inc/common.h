@@ -84,7 +84,7 @@ typedef enum _status
 
 typedef struct _firewall
 {
-	char rule[RULE_LEN];	
+	char rule[RULE_LEN];
 	struct _firewall *next;
 }FIRE_Wall;
 
@@ -113,7 +113,7 @@ typedef struct _msg
 	uchar  pro_type;
 	uint16 s_port;
 	uint16 d_port;
-	
+
 	int len;
 	int port;
 }MSG_Info;
@@ -121,7 +121,7 @@ typedef struct _msg
 typedef struct _eth_port
 {
 	char name[20];   //接口名称
-	
+
 	uchar ip[4];     //ip地址
 	uchar mac[6];    //mac地址
 	uchar netmask[4];//子网掩码

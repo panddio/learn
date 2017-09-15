@@ -13,7 +13,7 @@
               delete_arp_node
               free_arp_table
               change_arp_mac
-              print_arp_table            
+              print_arp_table
   修改历史   :
   1.日    期   : 2015年9月10日
     作    者   : if
@@ -69,14 +69,14 @@ ARP_Table *insert_arp_table(ARP_Table *head, ARP_Table node)
 {
 	ARP_Table *pi = NULL;
 	pi = (ARP_Table *)malloc(sizeof(ARP_Table));
-	
+
 	//bzero(pi, 0, sizeof(ARP_Table));
-	
+
 	if(pi != NULL) //成功申请到空间
 	{
 		*pi = node;
 		pi->next = NULL;
-		
+
 		int ip_val = iptoun_btol(node.ip);
 
 		if(head == NULL)
@@ -94,7 +94,7 @@ ARP_Table *insert_arp_table(ARP_Table *head, ARP_Table node)
 				pf = pb;
 				pb = pb->next;
 			}
-			
+
 			if(ip_val <= iptoun_btol(pb->ip))//链表头插入新节点
 			{
 				if(pb == head)
@@ -140,9 +140,9 @@ ARP_Table *search_arp_table(ARP_Table *head, const uchar *ip)
 	{
 		ARP_Table *pb = head;
 		uint ip_val;
-		
+
 		ip_val = iptoun_btol(ip);
-		
+
 		while((ip_val != iptoun_btol(pb->ip)) && (pb->next != NULL))
 			pb = pb->next;
 
@@ -171,9 +171,9 @@ ARP_Table *delete_arp_node(ARP_Table *head, const uchar *ip)
 	else
 	{
 		ARP_Table *pb = NULL, *pf = NULL;
-		pb = pf =head;	
+		pb = pf =head;
 		uint ip_val = iptoun_btol(ip);
-		
+
 		while((ip_val != iptoun_btol(pb->ip)) && (pb->next != NULL))
 		{
 			pf = pb;
@@ -183,14 +183,14 @@ ARP_Table *delete_arp_node(ARP_Table *head, const uchar *ip)
 		if(ip_val == iptoun_btol(pb->ip))
 		{
 			if(pb == head) //删除的节点再链表头
-				head = pb->next; 
-			
+				head = pb->next;
+
 			else if(pb->next == NULL) //删除的节点在表尾
 				pf->next = NULL;
-			
+
 			else //删除的节点再中间
 				pf->next = pb->next;
-			
+
 			free(pb);
 		}
 	}
@@ -245,7 +245,7 @@ Boolean change_arp_mac(ARP_Table *head, const uchar ip[], const uchar mac[])
 {
 	if(head == NULL){
 		printf("Link is not exist!\n");
-	}	
+	}
 	else {
 
 		ARP_Table *pnode = NULL;
@@ -274,7 +274,7 @@ void print_arp_table(ARP_Table *head)
 
 	if(head == NULL)
 	{
-		printf("Link is not exist!\n"); 
+		printf("Link is not exist!\n");
 	}
 	else
 	{
@@ -290,12 +290,12 @@ void print_arp_table(ARP_Table *head)
 
 			sprintf(ip,"%d.%d.%d.%d",\
 				    pb->ip[0],pb->ip[1],pb->ip[2],pb->ip[3]);
-			
+
 			sprintf(mac,"%02x:%02x:%02x:%02x:%02x:%02x",\
 				    pb->mac[0],pb->mac[1],pb->mac[2],pb->mac[3],pb->mac[4],pb->mac[5]);
 
 			printf("%-12s -- %s\n", ip,mac);
-			
+
 			pb = pb->next;
 		}
 		printf("_________________________________\n");
