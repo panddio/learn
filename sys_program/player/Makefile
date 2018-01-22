@@ -17,10 +17,10 @@ CFLAGES = -lpthread `pkg-config --cflags --libs gtk+-2.0` `pkg-config --cflags -
 
 $(BIN_TARGET):$(OBJ)
 	$(CC) $(OBJ)  -o $@ $(CFLAGES)
-    
+
 $(DIR_OBJ)/%.o:$(DIR_SRC)/%.c
 	$(CC) $(INCFAG) -c  $< -o $@ $(CFLAGES)
-	
+
 .PHONY:clean
 clean:
 #	find $(DIR_OBJ) -name *.o -exec rm -rf {}\ ;

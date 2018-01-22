@@ -5,16 +5,16 @@
  *        Created:  2015年11月11日 10时58分08秒
  *       Revision:  none
  *       Compiler:  gcc
- *         Author:  YOUR NAME (), 
+ *         Author:  YOUR NAME (),
  *        Company:  
  * ************************************************************************/
-#include <stdio.h>  
-#include <stdlib.h>	
-#include <string.h> 
-#include <fcntl.h>  
-#include <unistd.h>	
-#include <sys/stat.h>  
-#include <signal.h>	
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <signal.h>
 
 
 int flag = 0;
@@ -54,20 +54,20 @@ int main(int argc, char *argv[])
 	return 0;
 }
 #else
-   
-int main()   
-{   
-     struct sigaction action;  
-     int async_fd; 
-  
-     memset(&action, 0, sizeof(action));   
-     //信号处理函数
-     action.sa_handler = sync_handler;   
-     action.sa_flags = 0;       
-     //注册信号类型
-     sigaction(SIGIO, &action, NULL);   
 
-     async_fd = open("/dev/sync", O_RDONLY);   
+int main()
+{
+     struct sigaction action;
+     int async_fd;
+
+     memset(&action, 0, sizeof(action));
+     //信号处理函数
+     action.sa_handler = sync_handler;
+     action.sa_flags = 0;
+     //注册信号类型
+     sigaction(SIGIO, &action, NULL);
+
+     async_fd = open("/dev/sync", O_RDONLY);
      if(async_fd < 0)
      {
           printf("can not open /dev/sync \n");
@@ -75,19 +75,19 @@ int main()
      }
 
      //告诉驱动当前进程的PID
-     fcntl(async_fd, F_SETOWN, getpid());   
+     fcntl(async_fd, F_SETOWN, getpid());
      //设置驱动的FASYNC属性，支持异步通知
-     fcntl(async_fd, F_SETFL, fcntl(async_fd, F_GETFL) | FASYNC);   
-  
+     fcntl(async_fd, F_SETFL, fcntl(async_fd, F_GETFL) | FASYNC);
+
      printf("waiting for receive...\n");
 
      while(1){
-		 if(flag > 5) break;
-		 usleep(600*1000); 
-	 }
-            
-     close(async_fd);  
- 
-     return 0;   
+         if(flag > 5) break;
+         usleep(600*1000);
+     }
+
+     close(async_fd);
+
+     return 0;
 }
 #endif

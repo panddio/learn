@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
         DieWithUserMessage("SetupTCPClientSocket() failed","unable to connect");
 
     size_t echoStringLen = strlen(echoString);
-    
+
     //Send the string to the server
     ssize_t numBytes = send(sock, echoString, echoStringLen, 0);
     if(numBytes < 0)

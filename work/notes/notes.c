@@ -1820,6 +1820,7 @@ CAMERA POWER UP 时序是否符合 SPEC。
 5) Camera 测试
 a)照相：cimutils -I 0 -C -v -x 320 -y 240、 cimutils -I 0 -C -v -x 640 -y 480
 b)预览：cimutils -I 0 -P -w 320 -h 240
+b)预览：cimutils -I 0 -P -x 320 -y 240
 c)预览并照相：/cimutils -I 0 -P -v -l -w 320 -h 240
 d)获取帮助：cimutils --help
 ======================================================================
@@ -1909,6 +1910,12 @@ repo init -u ssh://wangqiuwei@194.169.1.31:29418/mirror/sdk-x1000-v1.6/linux/man
 
 网盘下载：
 链接: http://pan.baidu.com/s/1c0Dae0g 密码: syf8
+
+获取31服务器上的 QRcode 代码:
+repo init -u ssh://wangqiuwei@194.169.1.31:29418/mirror/QRcode/manifest.git
+
+获取31服务器上的 ilock 代码:
+repo init -u ssh://wangqiuwei@194.169.1.31:29418/mirror/ilock/manifest.git
 
 kernel:
 ./git/config:
@@ -2100,6 +2107,17 @@ make LDLIBS="-Wl -EL -W1 -start-group -lc -lnss_file -lnss_dns -lresolv -W1 -end
 
 3) 去掉符号信息
 mips-linux-gnu-strip strace
+
+----------------------------------------------------------------------
+编译openssl-1.1.0f
+./config no-asm shared --prefix="$PWD/output/" --cross-compile-prefix=mips-linux-gnu-
+修改Makefile CFLAGS
+make && make install
+
+----------------------------------------------------------------------
+编译libnl-3.4.0
+./configure --enable-static --prefix="$PWD/output/" --host=mipsel-linux CC=mips-linux-gnu-gcc LD=mips-linux-gnu-ld CFLAGS="-EL -mabi=32 -mhard-float -march=mips32r2 -Os"
+make && make install
 ======================================================================
 shell 判断字符串为空
 主要有以下几种方法：
@@ -2120,6 +2138,10 @@ test或[ ]的注意事项
 2、在中括号内的变量，最好都以双引号括号起来
 3、在中括号内的常数，最好都以单或双引号括号起来
 ======================================================================
+printf("### %s: %s -- %d ###\n",__FILE__, __FUNCTION__, __LINE__);
+
+
+IRQF_DISABLED | IRQF_NO_SUSPEND
 printk("### %s: %s -- %d ###\n",__FILE__, __FUNCTION__, __LINE__);
 
 # echo 250 > brightness 
@@ -2313,7 +2335,7 @@ ov5640 sysclock registers:
 			  10: SCLK = pll_clki/4
 			  11: sclk = pll_clki/8
 ======================================================================
-linux spi应用程序编写步骤:
+linux spi应用程序编写步骤:ilock_360S1
 第一：open
 第二：ioctl ，ioctl有九种cmd，分别对应不同的arg
 a、设置或获取SPI工作模式
@@ -2531,3 +2553,390 @@ sed -e '/^includesdir/ s/$(libdir).*$/$(includedir)/' \
 ======================================================================
 sudo autoreconf -ivf  
 
+======================================================================
+SD 启动
+
+List of all partitions:
+b300         7761920 mmcblk0  driver: mmcblk
+b301            8192 mmcblk0p1 W_ϒ��{���Qi@�
+b302           16384 mmcblk0p2 ����ûߊ��P��C
+b303         1048576 mmcblk0p3 W��7��^�h����A�
+b304         3117056 mmcblk0p4 x�]ɕi�����x�q
+
+
+sudo dd if=/dev/zero of=/dev/sdb bs=1M count=3
+sudo dd if=./x-loader-pad-with-mbr-gpt-with-sleep-lib.bin of=/dev/sdb bs=1M count=3
+sudo dd if=/dev/zero of=/dev/sdb bs=1M seek=3 count=8
+sudo dd if=./xImage of=/dev/sdb bs=1M seek=3 count=8
+
+sudo mkfs.ext4 /dev/sdb3
+sudo dd if=/dev/zero of=/dev/sdb3 bs=1M count=33
+sudo dd if=./system.ext4 of=/dev/sdb3 bs=1M count=33
+
+sudo mkfs.ext4 /dev/sdb4
+
+======================================================================
+文件a.txt内容：
+
+salkfdjaksdl
+234
+A ( 0 0 ) ( 2 4 );
+
+ROW 7;
+;
+ROW 2;
+;
+LOW;
+;
+GOOD
+WAHAHA
+
+VIA;
+adf
+322
+END
+
+现在要把A （ 0 0 ） （ 2 4 ）；这一行替换，另外把ROW开始到VIA为止，中间的都删掉，VIA行不删。改成以下的样子：
+salkfdjaksdl
+234
+A ( 0 0 ) ( 0 5 )
+   ( 3 3 ) ( 2 6 )
+   ( 3 0 ) ( 0 5 );
+
+VIA;
+adf
+322
+END
+
+程序：
+awk '/ROW/,/VIA/{if($0!~/VIA/)next;}{if ($0~/^A/) print "A ( 0 0 ) ( 0 5 )\n   ( 3 3 ) ( 2 6 )\n   ( 3 0 ) ( 0 5 );"; else print $0}'
+======================================================================
+“awk: line 12: function gensub never defined”
+解决方法：“sudo apt-get install gawk”
+
+替换行末 KERNEL_ARGS_INIT 为 KERNEL_ARGS_INIT "rootfstype=jffs2 root=/dev/mtdblock2 rw"
+awk -F " " '{if($NF~/KERNEL_ARGS_INIT/) gsub($NF, $NF" \"rootfstype=jffs2 root=/dev/mtdblock2 rw\"", $NF); print $0}' include/configs/qrcode.h 
+gawk -F " " '{if($NF~/KERNEL_ARGS_INIT/) {print gensub($NF, $NF" \"rootfstype=jffs2 root=/dev/mtdblock2 rw\"", 1)} else {print $0}}' include/configs/qrcode.h
+
+======================================================================
+mtd_debug info <device>
+mtd_debug read <device> <offset> <len> <dest-filename>
+mtd_debug write <device> <offset> <len> <source-filename>
+mtd_debug erase <device> <offset> <len>
+======================================================================
+vim中快速转换大小写：
+~          将光标下的字母改变大小写
+3~         将光标位置开始的3个字母改变其大小写
+g~~        改变当前行字母的大小写
+U          将可视模式下选择的字母全改成大写字母
+u          将可视模式下选择的字母全改成小写
+gUU        将当前行的字母改成大写
+3gUU       将从光标开始到下面3行字母改成大写
+guu        将当前行的字母全改成小写
+gUw        将光标下的单词改成大写
+guw        将光标下的单词改成小写
+
+======================================================================
+static void jz_wait_irqoff(void)
+{
+#define cache_prefetch(label)						\
+	do{								\
+		unsigned long addr,size,end;				\
+		/* Prefetch codes from label */				\
+		addr = (unsigned long)(&&label) & ~(32 - 1);		\
+		size = 32 * 6; /* load 128 cachelines */		\
+		end = addr + size;					\
+		for (; addr < end; addr += 32) {			\
+			__asm__ volatile (				\
+				".set mips32\n\t"			\
+				" cache %0, 0(%1)\n\t"			\
+				".set mips32\n\t"			\
+				:					\
+				: "I" (0x1c), "r"(addr));	\
+		}							\
+	}								\
+	while(0)
+
+	cache_prefetch(IDLE_PROGRAM);
+IDLE_PROGRAM:
+	if (1)
+		__asm__ __volatile__ (" .set    push            \n"
+				" .set    mips3           \n"
+				" sync                    \n"
+				" lw      $0,     0(%0)   \n"
+				" wait                    \n"
+				" nop                     \n"
+				" nop                     \n"
+				" nop                     \n"
+				" .set    pop             \n"
+				:: "r" (0xa0000000)
+				);
+	return;
+}
+======================================================================
+快速替换当前目录所有文件的某个字符串:
+grep -i "libqrcode_api.h" -r . | awk -F : '{print $1}' | sort | uniq | xargs sed -i 's/libqrcode_api.h/ingenic_api.h/g'
+======================================================================
+struct jz_sfc {
+    unsigned int  addr;
+    unsigned int  len;
+    unsigned int  cmd;
+    unsigned int  addr_plus;
+    unsigned int  sfc_mode;
+    unsigned char daten;
+    unsigned char addr_len;
+    unsigned char pollen;
+    unsigned char phase;
+    unsigned char dummy_bits;
+};
+
+#define  SFC_MODE_GENERATE(sfc, a)    do{                                       \
+        if ((a >= SPI_MODE_STANDARD) && (a <= SPI_MODE_QUAD)){                  \
+            ((struct jz_sfc *)sfc)->cmd = spi_mode_local[a].device_mode;        \
+        }                                                                       \
+        if((((struct jz_sfc *)sfc)->daten == 1)                                 \
+        && (((struct jz_sfc *)sfc)->addr_len != 0)){                            \
+            if (a == SPI_MODE_QUAD)                                             \
+                ((struct jz_sfc *)sfc)->sfc_mode = spi_mode_local[a].controller_mode; \
+            else                                                                \
+                ((struct jz_sfc *)sfc)->sfc_mode = 0;                           \
+        } else {                                                                \
+            ((struct jz_sfc *)sfc)->sfc_mode = 0;                               \
+        }                                                                       \
+} while(0)
+
+#define  SFC_SEND_COMMAND(sfc, a, b, c, d, e, f, g)   do{                       \
+        ((struct jz_sfc *)sfc)->cmd = a;                                        \
+        ((struct jz_sfc *)sfc)->len = b;                                        \
+        ((struct jz_sfc *)sfc)->addr = c;                                       \
+        ((struct jz_sfc *)sfc)->addr_len = d;                                   \
+        ((struct jz_sfc *)sfc)->addr_plus = 0;                                  \
+        ((struct jz_sfc *)sfc)->dummy_bits = e;                                \
+        ((struct jz_sfc *)sfc)->daten = f;                                      \
+        SFC_MODE_GENERATE(sfc, a);                                              \
+        sfc_send_cmd(sfc, g);                                                   \
+} while(0)
+
+/*
+ * cmd-->addr-->pid
+ */
+                         a      b  c  d  e  f  g  
+SFC_SEND_COMMAND(sfc, CMD_RDID, 2, 0, 1, 0, 1, 0);
+这条语句展开：
+sfc->cmd = CMD_RDID;
+sfc->len = 2;
+sfc->addr= 0;
+sfc->addr_len = 1;
+sfc->addr_plus = 0;    /*地址加1,用于连续读*/
+sfc->dummy_bits = 0;
+sfc->daten = 1;
+SFC_MODE_GENERATE(sfc, a); => SFC_MODE_GENERATE(sfc, CMD_RDID);
+得：
+sfc->sfc_mode = 0;
+
+sfc_send_cmd(sfc, g) => sfc_send_cmd(sfc, 0)
+{
+	sfc_set_transfer(sfc, 0<dir>) {
+    	if(dir == 1)
+        	sfc_transfer_direction(GLB_TRAN_DIR_WRITE);
+   		else
+        	sfc_transfer_direction(GLB_TRAN_DIR_READ);
+
+		sfc_set_length(sfc->len);
+		sfc_set_addr_length(0, sfc->addr_len);
+		sfc_cmd_en(0, 0x1);
+		sfc_data_en(0, sfc->daten);
+		sfc_write_cmd(0, sfc->cmd);
+		sfc_dev_addr(0, sfc->addr);
+		sfc_dev_addr_plus(0, sfc->addr_plus);
+		sfc_dev_addr_dummy_bits(0, sfc->dummy_bits);
+		sfc_set_mode(0, sfc->sfc_mode);
+    }
+
+    sfc_writel(1 << 2, SFC_TRIG);
+    sfc_writel(START, SFC_TRIG);
+
+    /*this must judge the end status*/
+    if((sfc->daten == 0)){
+        reg_tmp = src_readl(SFC_SR);
+        while (!(reg_tmp & END))
+            reg_tmp = src_readl(SFC_SR);
+
+        if ((src_readl(SFC_SR)) & END)
+            sfc_writel(CLR_END, SFC_SCR);
+    }
+}
+
+
+/* disable write protect */
+x = 0;                        a         b          c            d  e  f  g
+SFC_SEND_COMMAND(&sfc, CMD_SET_FEATURE, 1, FEATURE_REG_PROTECT, 1, 0, 1, 1);
+这条语句展开：
+sfc->cmd = CMD_SET_FEATURE;
+sfc->len = 1;
+sfc->addr= FEATURE_REG_PROTECT; 0xa0
+sfc->addr_len = 1;
+sfc->addr_plus = 0;
+sfc->dummy_bits = 0;
+sfc->daten = 1;
+SFC_MODE_GENERATE(sfc, a); => SFC_MODE_GENERATE(sfc, CMD_SET_FEATURE);
+得：
+sfc->sfc_mode = 0;
+
+sfc_send_cmd(sfc,g) => sfc_send_cmd(sfc, 1)
+{
+
+}
+
+sfc_write_data(&x, 1);
+
+
+
+spinand_read_page() {
+		                      a      b   c    d  e  f  g
+	SFC_SEND_COMMAND(&sfc, CMD_PARD, 0, page, 3, 0, 0, 0);
+	这条语句展开：
+	sfc->cmd = CMD_PARD;
+	sfc->len = 0;
+	sfc->addr= page;
+	sfc->addr_len = 3;
+	sfc->addr_plus = 0;
+	sfc->dummy_bits = 0;
+	sfc->daten = 0;  //0: no data transfer
+	SFC_MODE_GENERATE(sfc, a); => SFC_MODE_GENERATE(sfc, CMD_PARD);
+	得：
+	sfc->sfc_mode = 0;
+
+	sfc_send_cmd(sfc,g) => sfc_send_cmd(sfc, 0) {
+		....
+	}
+                                  a         b           c           d  e  f  g
+	SFC_SEND_COMMAND(&sfc, CMD_GET_FEATURE, 1, FEATURE_REG_STATUS1, 1, 0, 1, 0);
+	这条语句展开：
+	sfc->cmd = CMD_GET_FEATURE;
+	sfc->len = 1;
+	sfc->addr= FEATURE_REG_STATUS1;
+	sfc->addr_len = 1;
+	sfc->addr_plus = 0;
+	sfc->dummy_bits = 0;
+	sfc->daten = 1;  //1: has data transfer
+	SFC_MODE_GENERATE(sfc, a); => SFC_MODE_GENERATE(sfc, CMD_GET_FEATURE);
+	得：
+	sfc->sfc_mode = 0;
+
+	sfc_send_cmd(sfc,g) => sfc_send_cmd(sfc, 0) {
+		....
+	}
+
+#ifndef CONFIG_SPI_STANDARD
+    SFC_SEND_COMMAND(&sfc, SPI_MODE_QUAD, pagesize, column, addr_len, 0, 1, 0);
+	这条语句展开：
+	sfc->cmd = SPI_MODE_QUAD;
+	sfc->len = pagesize;
+	sfc->addr= column; // column address
+	sfc->addr_len = addr_len; // 3or4
+	sfc->addr_plus = 0;
+	sfc->dummy_bits = 0;
+	sfc->daten = 1;  //1: has data transfer
+	SFC_MODE_GENERATE(sfc, a); => SFC_MODE_GENERATE(sfc, SPI_MODE_QUAD);
+	得：
+	sfc->cmd = CMD_FR_CACHE_QUAD;
+	sfc->sfc_mode = 0;
+
+	sfc_send_cmd(sfc,g) => sfc_send_cmd(sfc, 0) {
+		....
+	}
+#else
+    if (addr_len == 4)
+        SFC_SEND_COMMAND(&sfc, SPI_MODE_STANDARD2, pagesize, column, addr_len, 0, 1, 0);halley2
+    else
+        SFC_SEND_COMMAND(&sfc, SPI_MODE_STANDARD, pagesize, column, addr_len, 0, 1, 0);
+#endif
+
+}
+======================================================================
+摄像头sensor某个寄存器写进去再读出来值不一样的问题：
+产家回答：某些寄存器写进去之后，不可读
+======================================================================
+
+会使用到hexdump工具。其内容如下：
+
+1. 键盘：
+
+# cat /dev/input/event0 | hexdump
+
+0000000 f6a6 4e15 154b 0006 0001 0004 0001 0000
+0000010 f6a6 4e15 1557 0006 0000 0000 0000 0000
+0000020 f6a6 4e15 8510 0008 0001 0004 0000 0000
+0000030 f6a6 4e15 8517 0008 0000 0000 0000 0000
+
+共九列：
+
+第六列表示上报事件: 0001 --> EV_KEY; 0000 ---> EV_SYN
+
+第七列表示键值: 0004 --> KEY_3
+
+第八列表示按键事件: 0001 --> PRESS, 0000 --> RELEASE
+
+
+2. 触摸屏（电容屏）
+
+# cat /dev/input/event1 | hexdump
+
+0000250 f832 4e15 c502 0006 0003 0039 0020 0000
+0000260 f832 4e15 c50f 0006 0003 0030 0004 0000
+0000270 f832 4e15 c514 0006 0003 0035 0263 0000
+0000280 f832 4e15 c519 0006 0003 0036 01fd 0000
+0000290 f832 4e15 c520 0006 0001 014a 0001 0000
+00002a0 f832 4e15 c525 0006 0003 0000 0263 0000
+00002b0 f832 4e15 c52b 0006 0003 0001 01fd 0000
+00002c0 f832 4e15 c530 0006 0000 0000 0000 0000
+00002d0 f832 4e15 be99 0007 0003 0039 ffff ffff
+00002e0 f832 4e15 bea5 0007 0001 014a 0000 0000
+00002f0 f832 4e15 bea8 0007 0000 0000 0000 0000
+
+
+第七列表示上报事件和： 0039 --> ABS_MT_TRACKING_ID; 0030 --> ABS_MT_TOUCH_MAJOR; 0035 --> ABS_MT_POSITION_X; 0036 --> ABS_MT_POSITION_Y
+
+014a --> BTN_TOUCH
+
+第八列表示上报值
+
+======================================================================
+./configure --prefix=/home/qwwang/work/github/test/sqlite/sqlite-autoconf-3200100/out --host=mips-linux CC=mips-linux-gnu-gcc
+
+======================================================================
+ repo init -u ssh://wangqiuwei@194.169.1.31:29418/mirror/uboot-task/manifest
+ 
+======================================================================
+ulimit 命令
+ 
+ulimit：显示（或设置）用户可以使用的资源的限制（limit），这限制分为软限制（当前限制）和硬限制（上限），其中硬限制是软限制的上限值，应用程序在运行过程中使用的系统资源不超过相应的软限制，任何的超越都导致进程的终止。
+ 
+参数 描述
+ulimited 不限制用户可以使用的资源，但本设置对可打开的最大文件数（max open files）
+和可同时运行的最大进程数（max user processes）无效
+-a 列出所有当前资源极限
+-c 设置core文件的最大值.单位:blocks
+-d 设置一个进程的数据段的最大值.单位:kbytes
+-f Shell 创建文件的文件大小的最大值，单位：blocks
+-h 指定设置某个给定资源的硬极限。如果用户拥有 root 用户权限，可以增大硬极限。任何用户均可减少硬极限
+-l 可以锁住的物理内存的最大值
+-m 可以使用的常驻内存的最大值,单位：kbytes
+-n 每个进程可以同时打开的最大文件数
+-p 设置管道的最大值，单位为block，1block=512bytes
+-s 指定堆栈的最大值：单位：kbytes
+-S 指定为给定的资源设置软极限。软极限可增大到硬极限的值。如果 -H 和 -S 标志均未指定，极限适用于以上二者
+-t 指定每个进程所使用的秒数,单位：seconds
+-u 可以运行的最大并发进程数
+-v Shell可使用的最大的虚拟内存，单位：kbytes
+
+======================================================================
+问：
+做一个项目，需要用v4l2采集摄像头图像。采集格式是V4L2_PIX_FMT_MJPEG，摄像头是罗技C270。
+现在我已经可以得到每一帧的数据。
+按理说MJPEG每一帧都是按照jpg格式的，但是它每一帧中没有定义huffman表，又不能完全按jpg的方式处理。现在的问题是如何把这批不含huffman表的jpg图像显示出来？
+
+答：
+在v4l2读出的帧中找到SOF0（Start Of Frame 0），插入个huffman表就可以用libjpeg解码成rgb。可以参考mjpg-streamer中input_uvc目录下的代码
+或者我刚调试好的 ：https://github.com/joeshang/joycar/blob/master/module/v4l2_camera/decoder_mjpeg.c 

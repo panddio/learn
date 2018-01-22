@@ -13,9 +13,9 @@ clean:
 endif
 
 ins:
-	sudo insmod ./timer_dev.ko
+	sudo insmod ./timer_drv.ko
 del:
-	sudo rmmod timer_dev
+	sudo rmmod timer_drv
 	
 CC := gcc
 mt:

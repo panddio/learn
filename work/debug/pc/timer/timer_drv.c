@@ -19,9 +19,9 @@
 #include <linux/timer.h> /*包括timer.h头文件*/
 #include <linux/slab.h>
 #include <linux/device.h>
+#include <linux/random.h>
 #include <linux/miscdevice.h>
 #include <asm/io.h>
-#include <asm/system.h>
 #include <asm/uaccess.h>
 #include <asm/atomic.h>
 
@@ -41,11 +41,21 @@ struct timer_dev *p_tdev = NULL;
 
 
 //定时器到达expires 时间后，这个函数被调用
-static void this_timer_handle(unsigned long arg) 
+static void this_timer_handle(unsigned long arg)
 {
+#if 1
+	unsigned char i;
+	unsigned char buf[32];
+
+	get_random_bytes(buf, sizeof(buf));
+	for (i = 0; i < 32; i++) {
+		//get_random_bytes(&buf[i], sizeof(buf[i]));
+		printk("@@buf[%d]=%u\n", i, buf[i]);
+	}
+#endif
 	mod_timer(&p_tdev->s_timer,jiffies + HZ); //更新定时器
 	atomic_inc(&p_tdev->counter); //使counter自增
-	printk(KERN_NOTICE "current jiffies is %ld\n",jiffies);
+	//printk(KERN_NOTICE "current jiffies is %ld\n",jiffies);
 }
 
 int this_timer_release(struct inode *inode, struct file *filp)
@@ -172,7 +182,7 @@ static void timer_setup_cdev(struct timer_dev *dev, int index)
 	}
 }
 
-static int __init timerdev_init(void)
+static int __init timerdrv_init(void)
 {
 	int ret;
 

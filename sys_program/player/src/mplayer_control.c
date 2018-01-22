@@ -179,7 +179,7 @@ void set_playing_song(MPLAYER *pm, int step)
 				gdk_threads_leave();
 				
 				gdk_threads_enter();
-				sungtk_button_inset_image(GTK_WIDGET(pm->ui.hbox_right.button_pause), "./image/style/play.png",70,70); 	
+				sungtk_button_inset_image(GTK_WIDGET(pm->ui.hbox_right.button_pause), "./image/style/play.png",70,70);
 				gdk_threads_leave();
 
 				clear_lrc_lable(pm);

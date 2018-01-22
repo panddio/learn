@@ -18,7 +18,7 @@ then
 	if [ -e /dev/$devname ]
 	then
 		sudo rm /dev/$devname
-	fi	
+	fi
 fi
 
 echo "installing $name"
@@ -30,7 +30,7 @@ then
 else
 	echo "Cannot install $name"
 	exit 1
-fi	
+fi
 
 #以下是为了创建设备文件
 i=1
@@ -46,7 +46,7 @@ done
 #echo "#$devno#   #$devname#"
 
 #cd /dev
-if [ ! -f /dev/$devname ]
+if [ ! -e /dev/$devname ]
 then
 	sudo mknod /dev/$devname c $devno 0
 

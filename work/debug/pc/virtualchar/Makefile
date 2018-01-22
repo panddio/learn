@@ -1,5 +1,5 @@
 ifneq ($(KERNELRELEASE),)
-	obj-m := timer_drv.o
+	obj-m := virtualchar.o
 
 else
 	KERNELDIR ?= /lib/modules/$(shell uname -r)/build
@@ -13,9 +13,9 @@ clean:
 endif
 
 ins:
-	sudo insmod ./timer_dev.ko
+	sudo insmod ./virtualchar.ko
 del:
-	sudo rmmod timer_dev
+	sudo rmmod virtualchar
 	
 CC := gcc
 mt:

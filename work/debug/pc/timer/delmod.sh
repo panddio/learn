@@ -14,7 +14,7 @@ devno=
 if [ -z "`cat /proc/devices | grep $devname`" ]
 then
 	echo "$devname haven't installed!"
-	exit 1	
+	exit 1
 fi
 
 #echo "$devno  $devname"

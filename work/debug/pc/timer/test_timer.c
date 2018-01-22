@@ -21,9 +21,9 @@ void main()
 	int fd = 0;
 	int counter = 0;
 	int old_counter = 0;
-	
+
 	fd = open("/dev/timer_drv",O_RDONLY);
-	
+
 	if(fd != -1)
 	{
 		while(1)
@@ -33,7 +33,7 @@ void main()
 			{
 				old_counter = counter;
 				printf("seconds open /dev/timer_dev: %d\n",counter);
-			}				
+			}
 		}
 	}
 	else

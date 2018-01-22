@@ -3,7 +3,7 @@
 
 
 if [ $# -lt 1 ]; then
-	echo "USAGE:`basename $0` [-a] [-k] [-u] [-m] [-c]" 
+	echo "USAGE:`basename $0` [-a] [-k] [-u] [-m] [-c]"
 	echo "   eg:`basename $0` -k -u"
 	echo "   eg:`basename $0` -c"
 	echo "   eg:`basename $0` -a"

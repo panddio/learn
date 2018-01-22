@@ -91,7 +91,7 @@ static void demo_i2c_start(void)
 	demo_i2c_delay();
 	dat_clear();
 	demo_i2c_delay();
-	clk_clear();	
+	clk_clear();
 }
 static void demo_i2c_stop(void)
 {
@@ -101,7 +101,7 @@ static void demo_i2c_stop(void)
 	demo_i2c_delay();
 	dat_set();
 	demo_i2c_delay();
-	clk_clear();	
+	clk_clear();
 }
 
 static void demo_i2c_init(void)
@@ -119,7 +119,7 @@ static void demo_i2c_send(unsigned char reg,unsigned char *buff,int len)
 	demo_i2c_receive_ack();
 	demo_i2c_send_byte(reg);
 	demo_i2c_receive_ack();
-	
+
 	while(len--){
 		demo_i2c_send_byte(buff[i++]);
 		demo_i2c_receive_ack();
@@ -135,7 +135,7 @@ static void demo_i2c_receive(unsigned char reg,unsigned char *buff,int len)
 	demo_i2c_send_byte(reg);
 	demo_i2c_receive_ack();
 	demo_i2c_stop();
-	
+
 	demo_i2c_start();
 	demo_i2c_send_byte((BMA150_ADDR<<1)|BMA150_READ);/* 发送地址 */
 	demo_i2c_receive_ack();
@@ -153,19 +153,19 @@ static int demo_bma150_open(struct inode *pinode, struct file *pfile)
 	unsigned char chip_id;
 	demo_i2c_receive(0x00,&chip_id,1);
 	printk("%s,%d,id = %d\n",__FUNCTION__,__LINE__,chip_id);
-	
+
 	return 0;
 }
 static ssize_t demo_bma150_read(struct file *pfile, char __user *buffer, size_t count, loff_t *offset)
 {
 	unsigned char data[6];
 	signed short x,y,z;
-	
+
 	demo_i2c_receive(0x02,data,6);
 	x = (data[0]>>6)|(data[1]<<2);
 	y = (data[2]>>6)|(data[3]<<2);
 	z = (data[4]>>6)|(data[5]<<2);
-	
+
 	x = (signed short)(x<<6)>>6;/* 符号位扩展 */
 	y = (signed short)(y<<6)>>6;
 	z = (signed short)(z<<6)>>6;

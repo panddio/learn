@@ -104,7 +104,7 @@ char send_msg(unsigned char msg_buf[], int raw_fd, struct sockaddr_ll sll)
 	//6.ip首部校验
 	ip_hdr->check = htons(checksum((unsigned short *)(packet+14),20/2));
 
-	//7.udp校验
+	//7.udp伪头部，用于计算校验和
 	unsigned char fake[1024] = {
 	10, 221, 2, 6, //源ip
 	10, 221, 2, 12, //目的ip
