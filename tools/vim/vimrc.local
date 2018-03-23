@@ -1,0 +1,200 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 实用设置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" encoding dectection
+set iskeyword+=.,_,$,%,-
+set termencoding=utf-8
+set encoding=utf8
+set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
+
+" search
+set incsearch
+"set smartcase
+set ignorecase
+
+" editor settings
+"set noexpandtab   " noexpand tab to space
+set expandtab       " expand tab to space
+
+" 当打开vim且没有文件时自动打开NERDTree
+autocmd vimenter * if !argc() | NERDTree | endif
+" 只剩 NERDTree时自动关闭
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" 设置当文件被改动时自动载入
+set autoread
+
+" 让配置变更立即生效
+" autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
+" Tagbar
+let g:tagbar_left=1
+let g:tagbar_width=20
+let g:tagbar_autofocus=1
+let g:tagbar_sort=0
+let g:tagbar_compact=1
+" tag for coffee
+if executable('coffeetags')
+  let g:tagbar_type_coffee = {
+	    \ 'ctagsbin' : 'coffeetags',
+	    \ 'ctagsargs' : '',
+	    \ 'kinds' : [
+	    \ 'f:functions',
+	    \ 'o:object',
+	    \ ],
+	    \ 'sro' : ".",
+	    \ 'kind2scope' : {
+	    \ 'f' : 'object',
+	    \ 'o' : 'object',
+	    \ }
+	    \ }
+
+  let g:tagbar_type_markdown = {
+	\ 'ctagstype' : 'markdown',
+	\ 'sort' : 0,
+	\ 'kinds' : [
+	\ 'h:sections'
+	\ ]
+	\ }
+endif
+
+" NerdTree
+let NERDChristmasTree=0
+let NERDTreeWinSize=20
+let NERDTreeChDirMode=2
+let NERDTreeWinPos="right"
+" let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
+" let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
+" let NERDTreeShowBookmarks=1
+
+" NeoComplCache
+" let g:neocomplcache_enable_at_startup=1
+" let g:neoComplcache_disableautocomplete=1
+" let g:neocomplcache_enable_underbar_completion=1
+" let g:neocomplcache_enable_camel_case_completion=1
+" let g:neocomplcache_enable_smart_case=1
+" let g:neocomplcache_min_syntax_length=3
+" let g:neocomplcache_lock_buffer_name_pattern='\*ku\*'
+" set completeopt-=preview
+
+" Enable omni completion.
+if !exists('g:neocomplcache_omni_patterns')
+  let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.erlang = '[a-zA-Z]\|:'
+
+" SuperTab
+" let g:SuperTabDefultCompletionType='context'
+" let g:SuperTabDefaultCompletionType='<C-X><C-U>'
+" let g:SuperTabRetainCompletionType=2
+
+" Tab list
+" set nolist
+" set list
+" set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+
+" IndentGuidesToggle
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=1
+let g:indent_guides_enable_on_vim_startup=0
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 自定义快捷键
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 配置VIM的 copy paste cut saving undo等快捷键像 Window 一样
+" 加上 source $VIMRUNTIME/mswin.vim 或在 /usr/share/vim/vimrc 中添加
+" mswin.vim位置在 /usr/share/vim/vim74/ 目录下面
+" source $VIMRUNTIME/mswin.vim
+vmap <C-c> "+y                " 选中状态下 Ctrl+c 复制
+imap <C-v> "+gP               " Ctrl+v 粘帖
+" imap <C+s> <ESC>:w<CR>a     " Ctrl+s 保存
+" map <C-z> u                 " Ctrl+z 撤销
+" map <C-A> ggVG$"+y          " Ctrl+a 全选+复制
+" set clipboard=unnamed
+
+"文件保存与退
+nmap fw     :w<CR>
+nmap fq     :q<CR>
+nmap fwq    :wq<CR>
+
+" 行光标移动  
+nmap lh   ^   " line head
+nmap le   $   " line end
+
+" 启动 vim 时关闭折叠代码
+" set nofoldenable
+" 基于缩进或语法进行代码折叠"
+set foldmethod=indent
+set foldmethod=syntax
+
+" CTRL+F12生成tags文件
+map <C-F12> :!ctags -R --sort=yes<CR><CR>
+
+" Keybindings for plugin toggle
+nnoremap <F3> :UndotreeToggle<cr>
+nnoremap <F4> :IndentGuidesToggle<cr>
+nnoremap <F5> :TagbarToggle<CR>
+nnoremap <F6> :NERDTreeToggle<CR>
+
+" Ack -i xxx ,-i参数表示忽略大小写,参数用法查看：man ack-grep
+nnoremap <F7> :Ack --noctags --notags -rw<Space>
+nnoremap <F8> "zyw:exe "Ack --noctags --notags -r ".@z.""<CR>
+
+" 关闭所有tab标签
+nnoremap <F9> :qa<CR>
+" 关闭当前tab标签
+nnoremap <F10> :bd<CR><CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 新文件标题
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"新建.c,.h,.sh,.java文件，自动插入文件头
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.rb,*.java,*.py exec ":call SetTitle()"
+"定义函数SetTitle，自动插入文件头
+func SetTitle()
+	"如果文件类型为.sh文件
+	if &filetype == 'sh'
+		call setline(1,"\#!/bin/bash")
+		call append(line("."), "")
+	elseif &filetype == 'python'
+		call setline(1,"#!/usr/bin/env python")
+		call append(line("."),"# coding=utf-8")
+		call append(line(".")+1, "")
+
+	elseif &filetype == 'ruby'
+		call setline(1,"#!/usr/bin/env ruby")
+		call append(line("."),"# encoding: utf-8")
+		call append(line(".")+1, "")
+
+	"elseif &filetype == 'mkd'
+	"	call setline(1,"<head><meta charset=\"UTF-8\"></head>")
+	else
+		call setline(1, "/*************************************************************************")
+		call append(line("."), "	> Filename: ".expand("%"))
+		call append(line(".")+1, "	>   Author: ")
+		call append(line(".")+2, "	>    Email: ")
+		call append(line(".")+3, "	> Datatime: ".strftime("%c"))
+		call append(line(".")+4, " ************************************************************************/")
+		call append(line(".")+5, "")
+	endif
+	if expand("%:e") == 'cpp'
+		call append(line(".")+6, "#include <iostream>")
+		call append(line(".")+7, "using namespace std;")
+		call append(line(".")+8, "")
+	endif
+	if &filetype == 'c'
+		call append(line(".")+6, "#include <stdio.h>")
+		call append(line(".")+7, "")
+	endif
+	if expand("%:e") == 'h'
+		call append(line(".")+6, "#ifndef _".toupper(expand("%:r"))."_H")
+		call append(line(".")+7, "#define _".toupper(expand("%:r"))."_H")
+		call append(line(".")+8, "#endif")
+	endif
+	if &filetype == 'java'
+		call append(line(".")+6,"public class ".expand("%:r"))
+		call append(line(".")+7,"")
+	endif
+	"新建文件后，自动定位到文件末尾
+endfunc
+autocmd BufNewFile * normal G
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

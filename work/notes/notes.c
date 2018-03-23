@@ -2939,4 +2939,27 @@ ulimited 不限制用户可以使用的资源，但本设置对可打开的最�
 
 答：
 在v4l2读出的帧中找到SOF0（Start Of Frame 0），插入个huffman表就可以用libjpeg解码成rgb。可以参考mjpg-streamer中input_uvc目录下的代码
-或者我刚调试好的 ：https://github.com/joeshang/joycar/blob/master/module/v4l2_camera/decoder_mjpeg.c 
+或者我刚调试好的 ：https://github.com/joeshang/joycar/blob/master/module/v4l2_camera/decoder_mjpeg.c
+
+======================================================================
+vim中自动格式化代码
+
+方法一：
+1. gg
+2. =
+3. G
+
+方法二：
+1，gg 跳转到第一行
+2，shift+v 转到可视模式
+3，shift+g 全选
+4，按下神奇的 =
+======================================================================
+export MYVIMRC=$HOME/.vimrc
+export ACKRC=$ACKRC:$HOME
+export GREP_OPTIONS="--exclude-dir=.git --exclude=.tags* --exclude=tags"
+======================================================================
+PSAM卡指终端安全控制模块。
+SAM卡：安全存取模块SAM是智能卡应用系统中安全控管的核心。
+SIM卡：移动通讯用户识别卡，符合GSM11.11，手机不但可以传输语音数据，还可以进行金融交易，电子商务等多种应用
+======================================================================
