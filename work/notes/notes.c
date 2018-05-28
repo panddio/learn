@@ -1916,6 +1916,7 @@ repo init -u ssh://wangqiuwei@194.169.1.31:29418/mirror/QRcode/manifest.git
 
 获取31服务器上的 ilock 代码:
 repo init -u ssh://wangqiuwei@194.169.1.31:29418/mirror/ilock/manifest.git
+repo init -u ssh://wangqiuwei@194.169.1.31:29418/mirror/ilock/manifest.git -m sz-master.xml
 
 kernel:
 ./git/config:
@@ -2720,8 +2721,9 @@ struct jz_sfc {
 /*
  * cmd-->addr-->pid
  */
-                         a      b  c  d  e  f  g  
-SFC_SEND_COMMAND(sfc, CMD_RDID, 2, 0, 1, 0, 1, 0);
+                         a       b     c      d          e        f       g  
+SFC_SEND_COMMAND(sfc, CMD_RDID,  2,    0,     1,         0,       1,      0);
+                         cmd    led  addr  addr_len  dummy_bits  daten  direction (r or w)
 这条语句展开：
 sfc->cmd = CMD_RDID;
 sfc->len = 2;
@@ -2963,3 +2965,148 @@ PSAM卡指终端安全控制模块。
 SAM卡：安全存取模块SAM是智能卡应用系统中安全控管的核心。
 SIM卡：移动通讯用户识别卡，符合GSM11.11，手机不但可以传输语音数据，还可以进行金融交易，电子商务等多种应用
 ======================================================================
+ git 忽略已经添加到版本库的文件
+
+第一步：
+　　指令：git rm -r --cached YOUR_PATH
+　　YOUR_PATH 即 你的文件，-r 指定了递归所有的子文件夹。
+
+第二步：
+　　修改项目根目录下的 .gitignore 文件，回车一个空行，写上忽略的目录或路径
+　　指令： vi .gitignore 
+
+第三步：
+　　提交 : git commit
+
+======================================================================
+1. 调用shell的函数进行判断
+
+exist = $(shell if [ -f $(FILE) ]; then echo "exist"; else echo "notexist"; fi;)
+ifeq (exist, "exist")
+#do something here
+endif
+
+当然，这个方法很土，但是能够工作！！
+
+
+2. 使用makefile的函数进行判断
+
+ifeq ($(FILE), $(wildcard $(FILE)))
+#do something here
+endif
+
+$(wildcard $(FILE))的意思是当前路径下的文件名匹配FILE的文件展开。
+
+======================================================================
+使用asm/div64.h中宏do_div
+
+#include <asm/div64.h>
+
+unsigned long long x,y,result;
+unsigned long mod;
+
+mod = do_div(x,y);
+result = x; 
+
+64 bit division 结果保存在x中；余数保存在返回结果中。
+======================================================================
+ATO25D1GA 读写速度测试
+CONFIG_SFC_SPEED=100M
+
+1) 写速度
+   测试方法：dd if=/dev/zero of=/dev/mtdblock4 bs=2k count=4096 conv=fsync
+   测试结果：
+            第1次：1.7MB/s
+            第2次：1.7MB/s
+            第3次：1.7MB/s
+
+
+   测试方法：dd if=/dev/zero of=/dd_file bs=2k count=4096 conv=fsync
+   测试结果：
+            第1次：1.1MB/s
+            第2次：1.0MB/s
+            第3次：1.1MB/s
+
+   测试方法：dd if=/dev/zero of=/dd_file bs=2k count=4096
+   测试结果：
+            第1次：42.4MB/s
+            第2次：40.2MB/s
+            第3次：43.6MB/s
+
+2) 读速度
+      测试方法：dd if=/dev/mtdblock4 of=/dev/null bs=2k count=4096
+   测试结果：
+            第1次：4.9MB/s
+            第2次：4.9MB/s
+            第3次：4.9MB/s
+======================================================================
+  env | grep -i proxy
+  unset NO_PROXY;
+  unset http_proxy;
+  unset  https_proxy;
+  unset HTTPS_PROXY;
+  unset no_proxy;
+  unset HTTP_PROXY;
+  unset NO_PROXY;
+======================================================================
+xz压缩文件方法或命令
+
+xz -z 要压缩的文件
+
+如果要保留被压缩的文件加上参数 -k ，如果要设置压缩率加入参数 -0 到 -9调节压缩率。如果不设置，默认压缩等级是6.
+xz解压文件方法或命令
+
+xz -d 要解压的文件
+
+同样使用 -k 参数来保留被解压缩的文件。
+创建或解压tar.xz文件的方法
+
+习惯了 tar czvf 或 tar xzvf 的人可能碰到 tar.xz也会想用单一命令搞定解压或压缩。其实不行 tar里面没有征对xz格式的参数比如 z是针对 gzip，j是针对 bzip2。
+
+创建tar.xz文件：只要先 tar cvf xxx.tar xxx/ 这样创建xxx.tar文件先，然后使用 xz -z xxx.tar 来将 xxx.tar压缩成为 xxx.tar.xz
+
+解压tar.xz文件：先 xz -d xxx.tar.xz 将 xxx.tar.xz解压成 xxx.tar 然后，再用 tar xvf xxx.tar来解包。
+
+======================================================================
+广和通 G510模块：
+
+一、开关机
+    模块开关机设计两个引脚： POWER_ON 和 VDD
+    POWER_ON：开关机按钮，低电平有效
+    VDD：指示开关机状态，低电平，G510处于关机状态；高电平，G510处于开机状态
+
+    1. 模块开机
+    POWER_ON 信号拉低并持续超过800ms，模块将开机。开机后 POWER_ON 的常态是高电平
+    2. 模块关机
+    有两种关机模式：
+    a. 把 POWER_ON 拉低超过 3s，模块将关机。此关机会逐步关掉所有的应用接口(包括 UART,SIM card 等)和注销网络
+    b. AT命令，使用 AT+MRST命令可以关机，此种关机不注销网络; 使用 AT+CFUN=0 命令可以关机，此种关机会注销网络
+    
+    3. 睡眠模式
+    a. 睡眠模式下模块不会保持持续的连接网络，会循环唤醒以监测是否有来电或数据传输
+    b. 睡眠模式下，模块的接口信号处于未激活状态，并且串口使用是受限
+    c. 当GSM网络有数据输入串行接口时，此时模块不会进入睡眠模式，只有任务处理完了，模块才根据ATS24命令进入睡眠模式
+    d. ATS24命令使模块睡眠，唤醒保持时间取决于命令ats24=[<value>]中的<value>。发送 AT命令:ats24=2，模块将在2s后进入睡眠模式，模块掉电后设置不保存
+    e. 睡眠状态下 AVDD 电压会自进低功耗模式，后续睡眠状态都选用此 PIN 脚作为参照。AVDD 是模块内部信号
+
+    4. 唤醒睡眠模式：从睡眠模式唤醒到待机模式，这过程需要5ms延迟，为了保证串行接口上数据的稳定
+    a. 临时唤醒：
+       1) GSM网络来数据（休眠期间模块会循环唤醒监视GSM网络）
+          模块可能在以下几种方式下工作:
+          a) 通过串行接口将数据发送到应用程序
+          b) 启用串行接口的 UART1_RING 信号
+          c) LPG 状态指示
+
+       2) 外部电路控制模块的 WAKE_UP 信号
+       3) UART1_DTR： 需要外部进行上拉到 VDD，使用方法和 WAKE_UP 一样。拉低 UART1_DTR，唤醒模块
+    b. 睡眠模式终止
+       发送AT命令：ATS24 = 0 禁止模块进入睡眠模式。如果模块已经进入了睡眠模式,必须先临时唤醒它
+
+    5. 紧急关机
+    EMERG_RST 脚拉低后 1s 内系统将会关机。只能作为紧急情况下使用,尽量减少使用此 pin 脚的次数
+
+
+======================================================================
+ilock 资料
+链接： https://pan.baidu.com/s/1dFfJweX
+密码：fbaw 
