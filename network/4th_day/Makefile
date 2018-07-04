@@ -1,5 +1,6 @@
+CC ?= gcc
 webserver:webserver.c
-	gcc -o webserver webserver.c -lpthread
+	$(CC) -o webserver webserver.c -lpthread
 
 .PHONY:clean
 clean:

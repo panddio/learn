@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <sys/select.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -26,7 +27,7 @@ int main(int argc, char *argv[])
 	bzero(&s_addr, sizeof(s_addr));
 	s_addr.sin_family = AF_INET;
 	s_addr.sin_port = htons(8080);
-	s_addr.sin_addr.s_addr = inet_addr("10.221.2.12");
+	s_addr.sin_addr.s_addr = inet_addr("194.169.3.8");
 	//连接
 	int ret = connect(sockfd, (struct sockaddr *)&s_addr, sizeof(s_addr));
 	if(ret != 0)
@@ -40,6 +41,7 @@ int main(int argc, char *argv[])
 	//4.接收服务器的应答
 	char buf[128]="";
 	recv(sockfd, buf, sizeof(buf),0);
+	printf("client recv=%s\n", buf);
 
 	//5.关闭tcp套接字
 	close(sockfd);

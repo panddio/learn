@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <sys/select.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -19,12 +20,15 @@
 
 void *fun(void *arg)
 {
-	int confd = (int )arg;
-	send(confd, "connect successful!\n", strlen("connect successful!\n"), 0);
+	int confd = *(int *)arg;
+
+	printf("Have a client connected, fd=%d\n", confd);
+
 	while(1)
 	{
 		char buf[512]="";
 		int recv_len = recv(confd, buf, sizeof(buf),0);
+		printf("server recv=%s\n", buf);
 		if(recv_len == 0) break;
 		strcat(buf, "\n");
 		send(confd, buf, strlen(buf), 0);
@@ -58,6 +62,7 @@ int main(int argc, char *argv[])
 		perror("bind:");
 		exit(-1);
 	}
+
 	//3.listen创建连接队列
 	listen(sockfd, 10);
 
@@ -69,7 +74,7 @@ int main(int argc, char *argv[])
 		int confd = accept(sockfd, (struct sockaddr *)&c_addr, &c_addr_len);
 
 		pthread_t pthid;
-		pthread_create(&pthid, NULL, (void *)fun, (void *)confd);
+		pthread_create(&pthid, NULL, (void *)fun, (void *)&confd);
 		pthread_detach(pthid); //线程分离
 	}
 	close(sockfd);

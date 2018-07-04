@@ -10,6 +10,7 @@
  * ************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 #include <sys/select.h>
 #include <sys/socket.h>
@@ -33,7 +34,7 @@ char const *ack[] ={"HTTP/1.1 200 OK\r\n",
 void *server_fun(void *arg)
 {
 	FILE *fp = NULL;
-	int connfd = (int)arg;
+	int connfd = *(int *)arg;
 	int len = 0;
 	char msg[512] = "";
 	char html[256]= "";
@@ -84,7 +85,7 @@ void *server_fun(void *arg)
 
 int main(int argc, char *argv[])
 {
-	unsigned short port = 8000;
+	unsigned short port = 8033;
 
 	//创建一个监听套接字
 	int sockfd  = socket(AF_INET, SOCK_STREAM, 0);
@@ -117,7 +118,7 @@ int main(int argc, char *argv[])
 	{
 		int connfd = accept(sockfd, (struct sockaddr *)&c_addr, &c_addr_len);
 		pthread_t pth;
-		pthread_create(&pth, NULL, (void *)server_fun, (void *)connfd);
+		pthread_create(&pth, NULL, (void *)server_fun, (void *)&connfd);
 		pthread_detach(pth);
 	}
 

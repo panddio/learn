@@ -2094,7 +2094,7 @@ xz -d 要解压的文件
 创建tar.xz文件：只要先 tar cvf xxx.tar xxx/ 这样创建xxx.tar文件先，然后使用 xz -z xxx.tar 来将 xxx.tar压缩成为 xxx.tar.xz
 解压tar.xz文件：先 xz -d xxx.tar.xz 将 xxx.tar.xz解压成 xxx.tar 然后，再用 tar xvf xxx.tar来解包
 ======================================================================
-根文件系统，网络已经连接，并且 网关、DNS 已经配置可以 ping通 域名的IP， 无法 ping通 域名的解决方法：
+根文件系统，网络已经连接，并且 网关、DNS已经配置可以 ping通 IP地址， 无法 ping通 域名地址的解决方法：
 问题原因：
 因为缺少几个必要的库和配置文件：/etc/nsswitch.conf, /lib/libnss_dns*, /lib/libnss_files*, and /lib/libresolv*
 实测： /etc/nsswitch.conf 可以没有
@@ -2270,8 +2270,8 @@ cpio 备份命令
 还原：cpio -icduv < [file|device} 将数据还原到系统中
 常用参数：
 -o   ：将数据copy到文件或设备上
--i    ：将数据从文件或设备上还原到系统中
--t    ：查看cpio建立的文件或设备内容
+-i   ：将数据从文件或设备上还原到系统中
+-t   ：查看cpio建立的文件或设备内容
 -c   ：一种比较新的portable format方式存储
 -v   ：在屏幕上显示备份过程中的文件名
 -B   ：让预设的blocks可以增加到5120bytes，默认是512bytes，这样可以使备份速度加快
@@ -3110,3 +3110,41 @@ xz -d 要解压的文件
 ilock 资料
 链接： https://pan.baidu.com/s/1dFfJweX
 密码：fbaw 
+======================================================================
+getopt_long()函数使用规则：
+
+1）使用前准备两种数据结构
+
+字符指针型变量
+该数据结构包括了所有要定义的短选项，每一个选项都只用单个字母表示。如果该选项需要参数（如，需要文件路径等），则其后跟一个冒号。例如，三个短选项分别为‘-h’‘-o’‘-v’，其中-o需要参数，其他两个不需要参数。那么，我们可以将数据结构定义成如下形式：
+const char *  const shor_options = “ho:v” ;
+如果是否有参数是可选的，则在后面有两个冒号。
+struct option 类型数组
+该数据结构中的每个元素对应了一个长选项，并且每个元素是由四个域组成。通常情况下，可以按以下规则使用。
+
+第一个元素，描述长选项的名称；
+第二个选项，代表该选项是否需要跟着参数，需要参数则为1，反之为0；
+第三个选项，可以赋为NULL；
+第四个选项，是该长选项对应的短选项名称。
+另外，数据结构的最后一个元素，要求所有域的内容均为0，即{NULL,0,NULL,0}。下面举例说明，还是按照短选项为‘-h’‘-o’‘-v’的例子，该数据结构可以定义成如下形式：
+
+const struct option long_options = {
+    {  “help”,      0,   NULL,   ‘h’  },
+    {  “output”,    1,   NULL,   ‘o’  },
+    {  “verbose”,   0,   NULL,   ‘v’  },
+    {  NULL,      0,    NULL,   0  }
+};
+
+2）调用方法
+参照 1）准备的两个数据结构，则调用方式可为：
+getopt_long( argc, argv, short_options, long_options, NULL);
+
+3）几种常见返回值
+(a)每次调用该函数，它都会分析一个选项，并且返回它的短选项，如果分析完毕，即已经没有选项了，则会返回-1。
+(b)如果getopt_long()在分析选项时，遇到一个没有定义过的选项，则返回值为‘?’，此时，程序员可以打印出所定义命令行的使用信息给用户。
+(c)当处理一个带参数的选项时，全局变量optarg会指向它的参数
+(d)当函数分析完所有参数时，全局变量optind（into argv）会指向第一个‘非选项’的位置
+======================================================================
+CC=mips-linux-gnu-gcc AR=mips-linux-gnu-ar ./configure --host=mips-linux --prefix=/home/qwwang/Desktop/mtd/e2fsprogs-1.42.4/output
+CC=mips-linux-gnu-gcc AR=mips-linux-gnu-ar ./configure --host=mips-linux --prefix=/home/qwwang/Desktop/mtd/lzo-2.10/output
+CC=mips-linux-gnu-gcc AR=mips-linux-gnu-ar ./configure --shared --prefix=/home/qwwang/Desktop/mtd/zlib-1.2.11/output
